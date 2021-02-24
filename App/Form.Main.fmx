@@ -22,6 +22,11 @@ object Form2: TForm2
       Text = 'SpeedButton1'
     end
   end
+  object FloatAnimation1: TFloatAnimation
+    Duration = 0.200000002980232200
+    StartValue = 0.000000000000000000
+    StopValue = 0.000000000000000000
+  end
   object MultiView1: TMultiView
     BorderOptions.Color = claSlateblue
     MasterButton = SpeedButton1
@@ -29,6 +34,7 @@ object Form2: TForm2
     Size.Width = 193.000000000000000000
     Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     TabOrder = 1
     object Rectangle1: TRectangle
       Align = Top

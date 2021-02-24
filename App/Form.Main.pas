@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.MultiView, FMX.Objects, FMX.StdCtrls,
   FMX.Layouts, System.Actions, FMX.ActnList, System.ImageList, FMX.ImgList,
-  FMX.ListBox;
+  FMX.ListBox, FMX.Ani;
 
 type
   TForm2 = class(TForm)
@@ -24,6 +24,7 @@ type
     ImageList1: TImageList;
     CONFIGURACAO: TListBoxItem;
     Image1: TImage;
+    FloatAnimation1: TFloatAnimation;
     procedure lblLoginClick(Sender: TObject);
     procedure ESTOQUEClick(Sender: TObject);
     procedure CONFIGURACAOClick(Sender: TObject);

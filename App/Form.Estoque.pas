@@ -38,6 +38,7 @@ type
     ImageList1: TImageList;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     Fprod :Integer;
 
@@ -55,26 +56,34 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
-uses Form.Login, Loading, Controller.API;
+uses FMX.Toast, Form.Login, Loading, Controller.API;
 
 procedure TfrmEstoque.btnAtualizarClick(Sender: TObject);
 begin
+  if Fprod = 0 then
+  begin
+    TToast.New(Self).Error('Produto não infomado.');
+    Exit;
+  end;
+
   TLoading.Show(Self, 'Atualizando...');
   TThread.CreateAnonymousThread(procedure
   begin
-      if Fprod = 0 then
-        raise Exception.Create('Produto não informado.');
 
       try
         objAPI.postEstoque( StrToInt(edtProduto.Text), StrToFloat(edtQuantidade.Text)  );
         Clear;
       except on E :Exception do
-        ShowMessage(E.Message);
+        begin
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
+
       end);
 
   end).Start;
@@ -93,12 +102,15 @@ begin
         prod := objAPI.getProduto(edtProduto.Text);
         Load(prod);
       except on E :Exception do
-        ShowMessage(E.Message);
+        begin
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
-              TLoading.Hide;
+        TLoading.Hide;
       end);
 
   end).Start;
@@ -122,6 +134,11 @@ begin
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
   ESTOQUE.Text        := 'ESTOQUE: ' + FloatToStr(prod.ESTOQUE);
   FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.INFORMACAO_COMPLEMENTAR;
+end;
+
+procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);
+begin
+  Self.Close;
 end;
 
 end.

@@ -19,6 +19,7 @@ object frmEstoque: TfrmEstoque
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'backtoolbutton'
+      OnClick = SpeedButton1Click
     end
     object Label1: TLabel
       Align = Client

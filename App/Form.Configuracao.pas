@@ -21,6 +21,7 @@ type
     Label2: TLabel;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +47,11 @@ begin
   ConfigINI.AcessoBanco.URL_API := URL_API.Text;
   ConfigINI.UpdateFile;
 
+  Self.Close;
+end;
+
+procedure TfrmConfiguracao.SpeedButton2Click(Sender: TObject);
+begin
   Self.Close;
 end;
 

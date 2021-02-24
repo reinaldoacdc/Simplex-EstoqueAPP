@@ -67,6 +67,7 @@ object frmConfiguracao: TfrmConfiguracao
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'backtoolbutton'
+      OnClick = SpeedButton2Click
     end
     object Label2: TLabel
       Align = Client
