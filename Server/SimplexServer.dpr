@@ -17,13 +17,14 @@ uses
   Controller.Produtos in 'Controller\Controller.Produtos.pas',
   Model.Entity.PRODUTOS in 'Model\Entity\Model.Entity.PRODUTOS.pas',
   Controller.Estoque in 'Controller\Controller.Estoque.pas',
-  Model.Entity.ESTOQUE in 'Model\Entity\Model.Entity.ESTOQUE.pas';
+  Model.Entity.ESTOQUE in 'Model\Entity\Model.Entity.ESTOQUE.pas',
+  Controller.API in '..\App\Controller.API.pas';
 
 var
   App : THorse;
 begin
   App := THorse.Create;
-  App.Port := 9000;
+  App.Port := ConfigINI.AcessoBanco.PORTA_API;
   App.Use(JHonson);
   App.Use(CORS);
 

@@ -74,6 +74,9 @@ begin
   carga.CODIGO_PRODUTO := StrToInt(codpro);
   carga.CODIGO_EMPRESA := StrToInt(codempresa);
 
+  //
+  carga.USUARIO := json.GetValue('USUARIO').Value;
+
   carga.QUANTIDADE := quantidade;
   carga.ESTOQUE_ANTERIOR := qtd_anterior;
   carga.ESTOQUE_ATUAL := qtd_atual;

@@ -1,0 +1,20 @@
+inherited frmLogin_LgXhdpiPh: TfrmLogin_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 3
+  inherited LayoutBody: TLayout
+    inherited rectLogin: TRectangle
+      inherited LayoutRect: TLayout
+        inherited Label1: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+      end
+    end
+    inherited lblLOGIN: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    inherited Label4: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+end

@@ -24,6 +24,8 @@ type
     FQTDATUAL: Double;
     [JsonName('HISTORICO')]
     FHISTORICO: String;
+    [JsonName('USUARIO')]
+    FUSUARIO: String;
     public
 
     constructor Create;
@@ -48,6 +50,8 @@ type
       property ESTOQUE_ATUAL :Double read FQTDATUAL write FQTDATUAL;
       [Campo('HISTORICO')]
       property HISTORICO :String read FHISTORICO  write FHISTORICO;
+      [Campo('USUARIO')]
+      property USUARIO :String read FUSUARIO write FUSUARIO;
   end;
 
 implementation

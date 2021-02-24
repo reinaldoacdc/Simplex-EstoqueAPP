@@ -1,0 +1,39 @@
+inherited frmEstoque_LgXhdpiPh: TfrmEstoque_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 3
+  inherited ToolBar1: TToolBar
+    Size.Width = 450.000000000000000000
+    inherited Label1: TLabel
+      Size.Width = 402.000000000000000000
+    end
+  end
+  inherited rectBottom: TRectangle
+    Position.Y = 599.000000000000000000
+    Size.Width = 450.000000000000000000
+    inherited Layout2: TLayout
+      Size.Width = 450.000000000000000000
+      inherited btnAtualizar: TButton
+        Size.Width = 450.000000000000000000
+      end
+    end
+    inherited Layout4: TLayout
+      Position.X = 293.000000000000000000
+    end
+  end
+  inherited rectTop: TRectangle
+    Size.Width = 450.000000000000000000
+    inherited Layout1: TLayout
+      Position.X = 317.000000000000000000
+    end
+  end
+  inherited Label2: TLabel
+    Size.Width = 450.000000000000000000
+  end
+  inherited ListBox1: TListBox
+    Size.Width = 450.000000000000000000
+    Size.Height = 493.000000000000000000
+    Viewport.Width = 450.000000000000000000
+    Viewport.Height = 493.000000000000000000
+  end
+end

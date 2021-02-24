@@ -31,9 +31,12 @@ type
     procedure setOperador(const Value: String);
     function getOperadorCodigo: Integer;
     procedure setOperadorCodigo(const Value: Integer);
+    function getPORTA_API: Integer;
+    procedure setPORTA_API(const Value: Integer);
     public
     published
         property URL_API :String read getURL_API write setURL_API;
+        property PORTA_API :Integer read getPORTA_API write setPORTA_API;
         property Servidor :String read getServidor write setServidor;
         property Caminho :String read getPathDB write setPathDB;
         property Usuario :String read getUsername write setUsername;
@@ -90,6 +93,11 @@ begin
   Result := Owner.ReadString('AcessoBanco', 'PathDB', '');
 end;
 
+function TConfigIniAcessoBanco.getPORTA_API: Integer;
+begin
+  Result := Owner.ReadInteger('AcessoBanco', 'PORTA_API', 9000);
+end;
+
 function TConfigIniAcessoBanco.getServidor: String;
 begin
   Result := Owner.ReadString('AcessoBanco', 'Servidor', '');
@@ -123,6 +131,11 @@ end;
 procedure TConfigIniAcessoBanco.setPathDB(const Value: String);
 begin
   Owner.WriteString('AcessoBanco', 'PathDB', Value);
+end;
+
+procedure TConfigIniAcessoBanco.setPORTA_API(const Value: Integer);
+begin
+  Owner.WriteInteger('AcessoBanco', 'PORTA_API', Value);
 end;
 
 procedure TConfigIniAcessoBanco.setServidor(const Value: String);
