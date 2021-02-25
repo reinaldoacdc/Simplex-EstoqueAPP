@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.ListBox;
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.ListBox,
+  FMX.ComboEdit;
 
 type
   TfrmLogin = class(TForm)
@@ -37,7 +38,7 @@ type
     procedure ComboBox1Exit(Sender: TObject);
     procedure ComboBox1Enter(Sender: TObject);
   private
-    { Private declarations }
+    function getCodEmpresa :Integer;
   public
     { Public declarations }
   end;
@@ -58,16 +59,20 @@ procedure TfrmLogin.ComboBox1Enter(Sender: TObject);
 begin
   if ComboBox1.Items.Count = 0 then
   begin
-    ComboBox1.Items.AddObject('Empresa1', TObject(1));
-    ComboBox1.Items.AddObject('Empresa2', TObject(2));
-    ComboBox1.Items.AddObject('Empresa3', TObject(3));
+      ComboBox1.Items.Add('1 - Empresa1');
+      ComboBox1.Items.Add('2 - Empresa2');
+      ComboBox1.Items.Add('3 - Empresa3');
+
+//    ComboBox1.Items.AddObject('Empresa1',  TObject(1));
+//    ComboBox1.Items.AddObject('Empresa2', TObject(2));
+//    ComboBox1.Items.AddObject('Empresa3', TObject(3));
   end;
 end;
 
 procedure TfrmLogin.ComboBox1Exit(Sender: TObject);
 var i :Integer;
 begin
-  //i := Integer(ComboBox1.Items.Objects[ComboBox1.ItemIndex]);
+  //ShowMessage( ComboBox1.Items[ComboBOx1.ItemIndex] );
   //ShowMessage(IntToStr(i));
 end;
 
@@ -76,19 +81,34 @@ begin
   //Action := TCloseAction.caFree;
 end;
 
+function TfrmLogin.getCodEmpresa: Integer;
+var str :String;
+begin
+  str := Copy(ComboBox1.Items[ComboBox1.ItemIndex], 1, pos('-', ComboBox1.Items[ComboBox1.ItemIndex])-1);
+  Result := StrToInt(Trim(str));
+end;
+
 procedure TfrmLogin.lblLogarClick(Sender: TObject);
 begin
+  if ComboBox1.ItemIndex = -1 then
+  begin
+    TToast.New(Self).Error('Selecione uma empresa');
+    Exit;
+  end;
+
+
+
   TLoading.Show(Self, 'Logando...');
 
 
   TThread.CreateAnonymousThread(procedure
   begin
-
       if objAPI.Login(NameEdit.Text, PasswordEdit.Text) then
       begin
         ConfigINI.AcessoBanco.OperadorNome := NameEdit.Text;
         ConfigINI.UpdateFile;
         frmMain.LoginSucessfull := True;
+        frmMain.CodEmpresa := getCodEmpresa;
       end;
 
       TThread.Synchronize(nil, procedure

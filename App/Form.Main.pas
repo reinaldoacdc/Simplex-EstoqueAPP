@@ -35,6 +35,7 @@ type
   private
 
   public
+    CodEmpresa :Integer;
     LoginSucessfull :Boolean;
   end;
 
