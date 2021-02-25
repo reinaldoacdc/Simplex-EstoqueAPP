@@ -2,47 +2,41 @@ object frmLogin: TfrmLogin
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 531
-  ClientWidth = 480
+  ClientHeight = 460
+  ClientWidth = 430
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
   DesignerMasterStyle = 3
-  object LayoutTop: TLayout
-    Position.X = 8.000000000000000000
-    Position.Y = 8.000000000000000000
-    Size.Width = 713.000000000000000000
-    Size.Height = 137.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 2
-  end
   object LayoutBody: TLayout
     Align = Center
-    Size.Width = 339.000000000000000000
+    Margins.Left = 20.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Size.Width = 356.000000000000000000
     Size.Height = 259.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 2
     object rectLogin: TRectangle
       Align = Top
       Margins.Left = 10.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 98.000000000000000000
-      Size.Width = 319.000000000000000000
-      Size.Height = 192.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 223.000000000000000000
       Size.PlatformDefault = False
       object LayoutRect: TLayout
         Align = Client
-        Size.Width = 319.000000000000000000
-        Size.Height = 137.000000000000000000
+        Size.Width = 336.000000000000000000
+        Size.Height = 168.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Label3: TLabel
           Align = Top
           Margins.Top = 5.000000000000000000
           Position.Y = 5.000000000000000000
-          Size.Width = 319.000000000000000000
+          Size.Width = 336.000000000000000000
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.HorzAlign = Center
@@ -51,21 +45,21 @@ object frmLogin: TfrmLogin
         end
         object btnLogin: TRectangle
           Align = Bottom
-          Fill.Color = claFirebrick
+          Fill.Color = claBlack
           Margins.Left = 10.000000000000000000
           Margins.Top = 10.000000000000000000
           Margins.Right = 10.000000000000000000
           Margins.Bottom = 10.000000000000000000
           Position.X = 10.000000000000000000
-          Position.Y = 96.000000000000000000
-          Size.Width = 299.000000000000000000
+          Position.Y = 127.000000000000000000
+          Size.Width = 316.000000000000000000
           Size.Height = 31.000000000000000000
           Size.PlatformDefault = False
           OnClick = lblLogarClick
           object lblLogar: TLabel
             Align = Client
             StyledSettings = [Family, Size, Style]
-            Size.Width = 299.000000000000000000
+            Size.Width = 316.000000000000000000
             Size.Height = 31.000000000000000000
             Size.PlatformDefault = False
             TextSettings.FontColor = claWhite
@@ -78,16 +72,16 @@ object frmLogin: TfrmLogin
         object Layout4: TLayout
           Align = Top
           Position.Y = 22.000000000000000000
-          Size.Width = 319.000000000000000000
+          Size.Width = 336.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 2
+          TabOrder = 3
           object Rectangle2: TRectangle
             Align = Client
             Fill.Color = claWhite
             Margins.Left = 10.000000000000000000
             Margins.Right = 10.000000000000000000
-            Size.Width = 299.000000000000000000
+            Size.Width = 316.000000000000000000
             Size.Height = 33.000000000000000000
             Size.PlatformDefault = False
             object PasswordEdit: TEdit
@@ -96,7 +90,7 @@ object frmLogin: TfrmLogin
               StyleLookup = 'editstyle'
               TabOrder = 2
               Password = True
-              Size.Width = 299.000000000000000000
+              Size.Width = 316.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
             end
@@ -105,19 +99,46 @@ object frmLogin: TfrmLogin
         object Label1: TLabel
           Align = Bottom
           StyledSettings = [Family, Size]
-          Position.Y = 63.000000000000000000
-          Size.Width = 319.000000000000000000
+          Position.Y = 94.000000000000000000
+          Size.Width = 336.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.StyleExt = {00070000000000000004000000}
           TextSettings.FontColor = claRed
-          TabOrder = 3
+          TabOrder = 4
+        end
+        object layEmpresa: TLayout
+          Align = Bottom
+          Position.Y = 61.000000000000000000
+          Size.Width = 336.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object rectEmpresa: TRectangle
+            Align = Client
+            Fill.Color = claWhite
+            Margins.Left = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Size.Width = 316.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            object ComboBox1: TComboBox
+              Align = Client
+              Size.Width = 316.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'comboboxstyle'
+              TabOrder = 2
+              OnEnter = ComboBox1Enter
+              OnExit = ComboBox1Exit
+            end
+          end
         end
       end
       object Layout1: TLayout
         Align = Top
         Position.Y = 22.000000000000000000
-        Size.Width = 319.000000000000000000
+        Size.Width = 336.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -126,7 +147,7 @@ object frmLogin: TfrmLogin
           Fill.Color = claWhite
           Margins.Left = 10.000000000000000000
           Margins.Right = 10.000000000000000000
-          Size.Width = 299.000000000000000000
+          Size.Width = 316.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           object NameEdit: TEdit
@@ -135,7 +156,7 @@ object frmLogin: TfrmLogin
             TabOrder = 1
             Padding.Top = 5.000000000000000000
             Padding.Bottom = 5.000000000000000000
-            Size.Width = 299.000000000000000000
+            Size.Width = 316.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             CharCase = ecUpperCase
@@ -148,7 +169,7 @@ object frmLogin: TfrmLogin
         Align = Top
         Margins.Top = 5.000000000000000000
         Position.Y = 5.000000000000000000
-        Size.Width = 319.000000000000000000
+        Size.Width = 336.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Center
@@ -159,7 +180,7 @@ object frmLogin: TfrmLogin
     object lblLOGIN: TLabel
       Align = Top
       StyledSettings = [Family, FontColor]
-      Size.Width = 339.000000000000000000
+      Size.Width = 356.000000000000000000
       Size.Height = 73.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 36.000000000000000000
@@ -172,7 +193,7 @@ object frmLogin: TfrmLogin
       Align = Top
       StyledSettings = [Family, FontColor]
       Position.Y = 73.000000000000000000
-      Size.Width = 339.000000000000000000
+      Size.Width = 356.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 18.000000000000000000

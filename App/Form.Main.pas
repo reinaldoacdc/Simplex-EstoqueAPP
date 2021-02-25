@@ -10,14 +10,14 @@ uses
   FMX.ListBox, FMX.Ani;
 
 type
-  TForm2 = class(TForm)
+  TfrmMain = class(TForm)
     MultiView1: TMultiView;
     ToolBar1: TToolBar;
     SpeedButton1: TSpeedButton;
     Rectangle1: TRectangle;
     lblLogin: TLabel;
     Layout1: TLayout;
-    Label2: TLabel;
+    lblSair: TLabel;
     ActionList1: TActionList;
     ListBox1: TListBox;
     ESTOQUE: TListBoxItem;
@@ -25,17 +25,21 @@ type
     CONFIGURACAO: TListBoxItem;
     Image1: TImage;
     FloatAnimation1: TFloatAnimation;
-    procedure lblLoginClick(Sender: TObject);
+    btnEntrar: TRectangle;
+    btnSair: TRectangle;
+    lblUsuario: TLabel;
     procedure ESTOQUEClick(Sender: TObject);
     procedure CONFIGURACAOClick(Sender: TObject);
+    procedure btnEntrarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
-    { Public declarations }
+    LoginSucessfull :Boolean;
   end;
 
 var
-  Form2: TForm2;
+  frmMain: TfrmMain;
 
 implementation
 
@@ -43,22 +47,35 @@ implementation
 
 uses Form.Login, Form.Estoque, Form.Configuracao;
 
-procedure TForm2.CONFIGURACAOClick(Sender: TObject);
+procedure TfrmMain.btnEntrarClick(Sender: TObject);
 begin
-  frmConfiguracao := TfrmConfiguracao.Create(Self);
-  frmConfiguracao.Show;
+  MultiView1.HideMaster;
+  frmLogin := TfrmLogin.Create(Self);
+  frmLogin.Show;
 end;
 
-procedure TForm2.ESTOQUEClick(Sender: TObject);
+procedure TfrmMain.btnSairClick(Sender: TObject);
 begin
+  MultiView1.HideMaster;
+  Self.LoginSucessfull := False;
+  lblUsuario.Text := '';
+
   frmEstoque := TfrmEstoque.Create(Self);
   frmEstoque.Show;
 end;
 
-procedure TForm2.lblLoginClick(Sender: TObject);
+procedure TfrmMain.CONFIGURACAOClick(Sender: TObject);
 begin
-  frmLogin := TfrmLogin.Create(Self);
-  frmLogin.Show;
+  MultiView1.HideMaster;
+  frmConfiguracao := TfrmConfiguracao.Create(Self);
+  frmConfiguracao.Show;
+end;
+
+procedure TfrmMain.ESTOQUEClick(Sender: TObject);
+begin
+  MultiView1.HideMaster;
+  frmEstoque := TfrmEstoque.Create(Self);
+  frmEstoque.Show;
 end;
 
 end.

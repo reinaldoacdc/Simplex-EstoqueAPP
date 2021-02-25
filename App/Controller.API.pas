@@ -3,7 +3,7 @@ unit Controller.API;
 interface
 
 uses  Model.Entity.PRODUTOS,
- System.JSON, System.Net.HttpClientComponent;
+ System.JSON, System.Net.HttpClient, System.Net.HttpClientComponent;
 
 type TApi = class
 private
@@ -13,6 +13,8 @@ private
 protected
 
 public
+  function Login(username, password :String) :Boolean;
+
   function getProduto(id :String) :TPRODUTOS;
   procedure postEstoque(codpro :Integer; qtdade :Double);
 
@@ -43,6 +45,23 @@ begin
 
   FJSonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
   Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
+end;
+
+function TApi.Login(username, password: String): Boolean;
+var
+  Url, JSonData   : String;
+  resp :IHTTPResponse;
+begin
+  Result := False;
+  Url := Format('http://%S/login?user=%s&password=%s', [ConfigINI.AcessoBanco.URL_API, username, password]);
+
+  try
+    resp := FNetHTTPRequest.Get(Url);
+    if resp.GetStatusCode = 200 then
+      Result := True;
+  except
+
+  end;
 end;
 
 procedure TApi.postEstoque(codpro: Integer; qtdade: Double);

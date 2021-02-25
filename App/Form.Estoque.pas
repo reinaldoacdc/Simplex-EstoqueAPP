@@ -7,7 +7,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Edit, FMX.ListBox,
-  System.ImageList, FMX.ImgList;
+  System.ImageList, FMX.ImgList, FMX.Ani;
 
 type
   TfrmEstoque = class(TForm)
@@ -36,9 +36,14 @@ type
     ESTOQUE: TListBoxItem;
     FORNECEDOR: TListBoxItem;
     ImageList1: TImageList;
+    Circle1: TCircle;
+    SpeedButton2: TSpeedButton;
+    AnimaBottom: TFloatAnimation;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     Fprod :Integer;
 
@@ -90,8 +95,12 @@ begin
 end;
 
 procedure TfrmEstoque.btnPesquisarClick(Sender: TObject);
-var prod :TPRODUTOS;
+var
+  idPesquisa :String;
+  prod :TPRODUTOS;
 begin
+  idPesquisa := edtProduto.Text;
+  Self.Clear;
   TLoading.Show(Self, 'Consultando...');
 
 
@@ -99,18 +108,20 @@ begin
   begin
       Fprod := 0;
       try
-        prod := objAPI.getProduto(edtProduto.Text);
+        prod := objAPI.getProduto(idPesquisa);
         Load(prod);
       except on E :Exception do
-        begin
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
-        end;
+//        begin
+//         TToast.New(Self).Error('Erro: ' + E.Message);
+//         TLoading.Hide;
+//        end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
+        if Fprod = 0 then
+          TToast.New(Self).Error('Produto não encontrado');
       end);
 
   end).Start;
@@ -124,6 +135,11 @@ begin
   ListBox1.Visible := False;
 end;
 
+procedure TfrmEstoque.FormShow(Sender: TObject);
+begin
+  Clear;
+end;
+
 procedure TfrmEstoque.Load(prod :TPRODUTOS);
 begin
   Fprod := prod.CODPRO;
@@ -134,11 +150,20 @@ begin
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
   ESTOQUE.Text        := 'ESTOQUE: ' + FloatToStr(prod.ESTOQUE);
   FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.INFORMACAO_COMPLEMENTAR;
+  ListBox1.Visible := True;
 end;
 
 procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);
 begin
   Self.Close;
+end;
+
+procedure TfrmEstoque.SpeedButton2Click(Sender: TObject);
+begin
+  rectBottom.Visible := not(rectBottom.Visible);
+  AnimaBottom.StartValue := Self.Width + 100;
+  AnimaBottom.StopValue := 0;
+  AnimaBottom.Start;
 end;
 
 end.

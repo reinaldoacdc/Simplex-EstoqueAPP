@@ -3,7 +3,7 @@ program SimplexAPP;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  Form.Main in 'Form.Main.pas' {Form2},
+  Form.Main in 'Form.Main.pas' {frmMain},
   Form.Login in 'Form.Login.pas' {frmLogin},
   Form.Estoque in 'Form.Estoque.pas' {frmEstoque},
   Form.Configuracao in 'Form.Configuracao.pas' {frmConfiguracao},
@@ -17,7 +17,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmEstoque, frmEstoque);
   Application.CreateForm(TfrmConfiguracao, frmConfiguracao);
   Application.Run;
