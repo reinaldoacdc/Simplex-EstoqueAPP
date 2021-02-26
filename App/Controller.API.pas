@@ -3,7 +3,7 @@ unit Controller.API;
 interface
 
 uses  Model.Entity.PRODUTOS,
- System.JSON, System.Net.HttpClient, System.Net.HttpClientComponent;
+System.Classes, System.JSON, System.Net.HttpClient, System.Net.HttpClientComponent;
 
 type TApi = class
 private
@@ -15,8 +15,9 @@ protected
 public
   function Login(username, password :String) :Boolean;
 
-  function getProduto(id :String) :TPRODUTOS;
-  procedure postEstoque(codpro :Integer; qtdade :Double);
+  function getProduto(id :String; codempresa :Integer) :TPRODUTOS;
+  function getEmprsas :TStringList;
+  procedure postEstoque(codpro :Integer; qtdade :Double; codempresa :Integer);
 
   constructor Create; overload;
   destructor Destroy; override;
@@ -29,18 +30,37 @@ var
 
 implementation
 
-uses System.Classes, REST.Json, System.SysUtils, uConfigINI, Model.Entity.ESTOQUE;
+uses  REST.Json, System.SysUtils, uConfigINI, Model.Entity.ESTOQUE;
 
 { TApi }
 
-function TApi.getProduto(id :String) :TPRODUTOS;
+function TApi.getEmprsas: TStringList;
+var
+  Url, JSonData   : String;
+  JsonArray :TJSONArray;
+  ArrayElement: TJSonValue;
+  codempresa, nomefantasia :String;
+begin
+  Url := Format('http://%s/empresas', [ConfigINI.AcessoBanco.URL_API]);
+  JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
+  JsonArray := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONArray;
+  Result := TStringList.Create;
+
+  for ArrayElement in JsonArray do
+  begin
+    codempresa   := ArrayElement.GetValue<STRING>('CODEMPRESA');
+    nomefantasia := ArrayElement.GetValue<STRING>('NOMEFANTASIA');
+
+    Result.Add(Format('%s - %s', [codempresa, nomefantasia]));
+  end;
+end;
+
+function TApi.getProduto(id :String; codempresa :Integer) :TPRODUTOS;
 var
   Url, JSonData   : String;
   item: TJSONObject;
-  a: TJSONArray;
-  idx :Integer;
 begin
-  Url := Format('http://%s/produto?codpro=%s&codempresa=%s', [ConfigINI.AcessoBanco.URL_API, id, '1']);
+  Url := Format('http://%s/produto?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
   JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
 
   FJSonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
@@ -64,12 +84,12 @@ begin
   end;
 end;
 
-procedure TApi.postEstoque(codpro: Integer; qtdade: Double);
+procedure TApi.postEstoque(codpro: Integer; qtdade: Double; codempresa :Integer);
 var
   Url, JSonData   : String;
   estoque :TESTOQUE;
 begin
-  Url := 'http://localhost:9000/estoque?codpro=25547&codempresa=1';
+  Url := Format('http://%s/estoque?codpro=%d&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, codpro, codempresa]);
   JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
 
   FJSonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;

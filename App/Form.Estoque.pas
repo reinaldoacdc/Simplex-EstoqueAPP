@@ -61,7 +61,7 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
-uses FMX.Toast, Form.Login, Loading, Controller.API;
+uses FMX.Toast, Form.Login, Loading, Controller.API, Form.Main;
 
 procedure TfrmEstoque.btnAtualizarClick(Sender: TObject);
 begin
@@ -76,7 +76,7 @@ begin
   begin
 
       try
-        objAPI.postEstoque( StrToInt(edtProduto.Text), StrToFloat(edtQuantidade.Text)  );
+        objAPI.postEstoque( StrToInt(edtProduto.Text), StrToFloat(edtQuantidade.Text), frmMain.CodEmpresa  );
         Clear;
       except on E :Exception do
         begin
@@ -108,7 +108,7 @@ begin
   begin
       Fprod := 0;
       try
-        prod := objAPI.getProduto(idPesquisa);
+        prod := objAPI.getProduto(idPesquisa, frmMain.CodEmpresa);
         Load(prod);
       except on E :Exception do
 //        begin

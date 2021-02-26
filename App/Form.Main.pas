@@ -46,7 +46,7 @@ implementation
 
 {$R *.fmx}
 
-uses Form.Login, Form.Estoque, Form.Configuracao;
+uses Form.Login, Form.Estoque, Form.Configuracao, Controller.API;
 
 procedure TfrmMain.btnEntrarClick(Sender: TObject);
 begin

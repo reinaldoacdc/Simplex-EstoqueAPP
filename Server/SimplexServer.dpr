@@ -18,7 +18,9 @@ uses
   Model.Entity.PRODUTOS in 'Model\Entity\Model.Entity.PRODUTOS.pas',
   Controller.Estoque in 'Controller\Controller.Estoque.pas',
   Model.Entity.ESTOQUE in 'Model\Entity\Model.Entity.ESTOQUE.pas',
-  Controller.API in '..\App\Controller.API.pas';
+  Controller.API in '..\App\Controller.API.pas',
+  Controller.Empresa in 'Controller\Controller.Empresa.pas',
+  Model.Entity.EMPRESA in 'Model\Entity\Model.Entity.EMPRESA.pas';
 
 var
   App : THorse;
@@ -31,6 +33,7 @@ begin
   Controller.Usuarios.Registry(App);
   Controller.Produtos.Registry(App);
   Controller.Estoque.Registry(App);
+  Controller.Empresa.Registry(App);
 
   App.Listen;
 end.

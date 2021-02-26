@@ -157,6 +157,8 @@
         <DCCReference Include="Controller\Controller.Estoque.pas"/>
         <DCCReference Include="Model\Entity\Model.Entity.ESTOQUE.pas"/>
         <DCCReference Include="..\App\Controller.API.pas"/>
+        <DCCReference Include="Controller\Controller.Empresa.pas"/>
+        <DCCReference Include="Model\Entity\Model.Entity.EMPRESA.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
