@@ -32,7 +32,7 @@ object frmLogin: TfrmLogin
         Size.Height = 168.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        object Label3: TLabel
+        object lblSenha: TLabel
           Align = Top
           Margins.Top = 5.000000000000000000
           Position.Y = 5.000000000000000000
@@ -69,7 +69,7 @@ object frmLogin: TfrmLogin
             OnClick = lblLogarClick
           end
         end
-        object Layout4: TLayout
+        object laySenha: TLayout
           Align = Top
           Position.Y = 22.000000000000000000
           Size.Width = 336.000000000000000000
@@ -89,6 +89,7 @@ object frmLogin: TfrmLogin
               Align = Client
               StyleLookup = 'editstyle'
               TabOrder = 2
+              ReturnKeyType = Next
               Password = True
               Size.Width = 316.000000000000000000
               Size.Height = 32.000000000000000000
@@ -96,20 +97,9 @@ object frmLogin: TfrmLogin
             end
           end
         end
-        object Label1: TLabel
-          Align = Bottom
-          StyledSettings = [Family, Size]
-          Position.Y = 94.000000000000000000
-          Size.Width = 336.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.StyleExt = {00070000000000000004000000}
-          TextSettings.FontColor = claRed
-          TabOrder = 4
-        end
         object layEmpresa: TLayout
           Align = Bottom
-          Position.Y = 61.000000000000000000
+          Position.Y = 84.000000000000000000
           Size.Width = 336.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
@@ -135,7 +125,7 @@ object frmLogin: TfrmLogin
           end
         end
       end
-      object Layout1: TLayout
+      object layUsuario: TLayout
         Align = Top
         Position.Y = 22.000000000000000000
         Size.Width = 336.000000000000000000
@@ -154,6 +144,7 @@ object frmLogin: TfrmLogin
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Client
             TabOrder = 1
+            ReturnKeyType = Next
             Padding.Top = 5.000000000000000000
             Padding.Bottom = 5.000000000000000000
             Size.Width = 316.000000000000000000
@@ -165,7 +156,7 @@ object frmLogin: TfrmLogin
           end
         end
       end
-      object Label2: TLabel
+      object lblUsuario: TLabel
         Align = Top
         Margins.Top = 5.000000000000000000
         Position.Y = 5.000000000000000000

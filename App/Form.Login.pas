@@ -13,18 +13,17 @@ type
     LayoutBody: TLayout;
     rectLogin: TRectangle;
     LayoutRect: TLayout;
-    Label3: TLabel;
+    lblSenha: TLabel;
     btnLogin: TRectangle;
     lblLogar: TLabel;
-    Layout4: TLayout;
+    laySenha: TLayout;
     Rectangle2: TRectangle;
     PasswordEdit: TEdit;
-    Layout1: TLayout;
+    layUsuario: TLayout;
     Rectangle1: TRectangle;
     NameEdit: TEdit;
-    Label2: TLabel;
+    lblUsuario: TLabel;
     lblLOGIN: TLabel;
-    Label1: TLabel;
     Label4: TLabel;
     layEmpresa: TLayout;
     rectEmpresa: TRectangle;
@@ -51,9 +50,6 @@ implementation
 {$R *.fmx}
 
 uses FMX.Toast, Controller.API, uConfigINI, Form.Main, Loading;
-
-//uses Controller.API, uConfigINI, Form.Main;
-
 
 procedure TfrmLogin.ComboBox1Enter(Sender: TObject);
 var list :TStringList;

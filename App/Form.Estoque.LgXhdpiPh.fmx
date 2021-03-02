@@ -2,38 +2,44 @@ inherited frmEstoque_LgXhdpiPh: TfrmEstoque_LgXhdpiPh
   ClientHeight = 695
   ClientWidth = 450
   DesignerMasterStyle = 3
-  inherited ToolBar1: TToolBar
+  inherited VScroll: TVertScrollBox
     Size.Width = 450.000000000000000000
-    inherited Label1: TLabel
-      Size.Width = 402.000000000000000000
-    end
-  end
-  inherited rectBottom: TRectangle
-    Position.Y = 599.000000000000000000
-    Size.Width = 450.000000000000000000
-    inherited Layout2: TLayout
+    Size.Height = 695.000000000000000000
+    Viewport.Width = 450.000000000000000000
+    Viewport.Height = 695.000000000000000000
+    inherited ToolBar1: TToolBar
       Size.Width = 450.000000000000000000
-      inherited btnAtualizar: TButton
-        Size.Width = 450.000000000000000000
+      inherited Label1: TLabel
+        Size.Width = 402.000000000000000000
       end
     end
-    inherited Layout4: TLayout
-      Position.X = 293.000000000000000000
+    inherited rectTop: TRectangle
+      Size.Width = 450.000000000000000000
+      inherited Layout1: TLayout
+        Position.X = 317.000000000000000000
+      end
     end
-  end
-  inherited rectTop: TRectangle
-    Size.Width = 450.000000000000000000
-    inherited Layout1: TLayout
-      Position.X = 317.000000000000000000
+    inherited ListBox1: TListBox
+      Size.Width = 450.000000000000000000
+      Size.Height = 539.000000000000000000
+      Viewport.Width = 450.000000000000000000
+      Viewport.Height = 539.000000000000000000
     end
-  end
-  inherited Label2: TLabel
-    Size.Width = 450.000000000000000000
-  end
-  inherited ListBox1: TListBox
-    Size.Width = 450.000000000000000000
-    Size.Height = 493.000000000000000000
-    Viewport.Width = 450.000000000000000000
-    Viewport.Height = 493.000000000000000000
+    inherited Layout3: TLayout
+      Position.Y = 645.000000000000000000
+      Size.Width = 450.000000000000000000
+      inherited Layout4: TLayout
+        Position.X = 400.000000000000000000
+      end
+      inherited Layout5: TLayout
+        Size.Width = 400.000000000000000000
+        inherited rectBottom: TRectangle
+          Size.Width = 400.000000000000000000
+        end
+      end
+    end
+    inherited Label2: TLabel
+      Size.Width = 450.000000000000000000
+    end
   end
 end

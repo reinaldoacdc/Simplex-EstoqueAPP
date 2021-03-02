@@ -3,16 +3,16 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'Form2'
   ClientHeight = 480
-  ClientWidth = 394
+  ClientWidth = 437
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 3
   object ToolBar1: TToolBar
-    Size.Width = 394.000000000000000000
+    Size.Width = 437.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 2
     object SpeedButton1: TSpeedButton
       Align = Left
       Size.Width = 48.000000000000000000
@@ -27,25 +27,139 @@ object frmMain: TfrmMain
     StartValue = 0.000000000000000000
     StopValue = 0.000000000000000000
   end
+  object ScaledLayout2: TScaledLayout
+    Align = Client
+    OriginalWidth = 437.000000000000000000
+    OriginalHeight = 432.000000000000000000
+    Size.Width = 437.000000000000000000
+    Size.Height = 432.000000000000000000
+    Size.PlatformDefault = False
+    object GridLayout1: TGridLayout
+      Align = Center
+      ItemHeight = 70.000000000000000000
+      ItemWidth = 150.000000000000000000
+      Padding.Left = 20.000000000000000000
+      Padding.Top = 20.000000000000000000
+      Padding.Right = 5.000000000000000000
+      Orientation = Horizontal
+      Size.Width = 185.000000000000000000
+      Size.Height = 369.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Layout3: TLayout
+        Position.X = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 150.000000000000000000
+        Size.Height = 70.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnLogin: TRectangle
+          Align = Client
+          Fill.Color = claBlack
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 130.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = btnEntrarClick
+          object lblNovoLogin: TLabel
+            Align = Client
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Login'
+            TabOrder = 0
+          end
+        end
+      end
+      object Layout4: TLayout
+        Position.X = 20.000000000000000000
+        Position.Y = 90.000000000000000000
+        Size.Width = 150.000000000000000000
+        Size.Height = 70.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btnEstoque: TRectangle
+          Align = Client
+          Fill.Color = claBlack
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 130.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = ESTOQUEClick
+          object lblEstoque: TLabel
+            Align = Client
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Estoque'
+            TabOrder = 0
+          end
+        end
+      end
+      object Layout5: TLayout
+        Position.X = 20.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 150.000000000000000000
+        Size.Height = 70.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object btnConfiguracoes: TRectangle
+          Align = Client
+          Fill.Color = claBlack
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 130.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = CONFIGURACAOClick
+          object lblConfiguracao: TLabel
+            Align = Client
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Configura'#231#245'es'
+            TabOrder = 0
+          end
+        end
+      end
+    end
+  end
   object MultiView1: TMultiView
     BorderOptions.Color = claSlateblue
     MasterButton = SpeedButton1
     ControlType = Platform
-    Size.Width = 193.000000000000000000
+    Size.Width = 250.000000000000000000
     Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
     Visible = False
-    TabOrder = 1
+    TabOrder = 0
     object Rectangle1: TRectangle
       Align = Top
       Fill.Color = claBlack
-      Size.Width = 193.000000000000000000
+      Size.Width = 250.000000000000000000
       Size.Height = 97.000000000000000000
       Size.PlatformDefault = False
       object Layout1: TLayout
         Align = Bottom
         Position.Y = 64.000000000000000000
-        Size.Width = 193.000000000000000000
+        Size.Width = 250.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -71,7 +185,7 @@ object frmMain: TfrmMain
         object btnSair: TRectangle
           Align = Right
           Fill.Color = claBlack
-          Position.X = 112.000000000000000000
+          Position.X = 169.000000000000000000
           Size.Width = 81.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
@@ -99,36 +213,37 @@ object frmMain: TfrmMain
             PNG = {
               89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
               98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              03AA494441545847ED98CD4B155118C6EFF59A89E5A656520BA3A81642D0072D
-              B28896F605B589566EFC035AD83F50ABA85544B90B5AB416097782452BA95584
-              6DB410B376621F8BD06BBFE7CCE369E6CE5C1D4DC2C01F1CE69CF77DDEE79CF9
-              B867462BDBFC6F547D2CCDF2F2720BED0CED32C3531CF771EC0AC94A65AE5AAD
-              CE729CE038427B4DAB27A94DA65EAFEFA4DD5E5C5CFCCA224A21AD6A546B9BCD
-              01C3EB987FF23CEB46B5F2B0DDC6C1ABBAB4B47407C37A629DC07886F82326B9
-              483B4468B79AFA8A29274D101B79C88BEEBA1F93800A31781EDC0CA69F997080
-              6ECDB2A64823AD6A42B1B1E7FA1745E1DDC42281F10813743A5D1AD5A8D63601
-              793B5D0E4CAEE912BB5E060F39B4381D417703DD38ED9BDBB8624E47546B8F80
-              BC3587D3AB83BE9D82F800FBEC328B615CA53D55BE09CA656E0B632D2A5E29CF
-              D1EE747358F96052128A6619E76E13B15B9634451ACB23F292A725D20C3A550C
-              9A160ABE24F25030E05484700D4DDC8B38EB67E8BAD4D4775827234DEEE19767
-              A2081ACD957B1422247B831210EB675B64D89328A2619B53AA6F732C20AD5311
-              C23AA1F496D0EB5420B33A0CAEBA5B61CB1FA62D799866978F42AF8A5FEEAB46
-              FDB96414486B03F294B787993945E3E53AE1A30A5FB8DBC814B766E5FDD483E1
-              49F765AE7EB82AD64CA9DF4883779C33079772D2975197FBB0C339986CD432DD
-              B6EF8C87D4D47758CFD6A8E539E46D99EA271DCE4372C13A2DA8E92648EE0892
-              F94459C8BC3496E790B7755AD082C379D20B820E870BC1F418FA77D6461453CE
-              B242907524EAFC82329B17C9C95AADB6726607B8D71FDD2F04BF1AED1CDDE349
-              A4F2969A97B4A21F43849A6E0ED3EA736B3FB4B6B61E553F07C931AD5A709697
-              1CDE74E4ED69F4AC8D391C68FC95BDF1516771C1DDA6A0D941EB6682D31CCF73
-              3CA898D34D69F08E73E64098DE18B5C5C74D6F05263DCB59DD23FF8AF63351FF
-              4131E5A491D6651124DA3CE3EB03321B630692995707F43BA585DC24F7DEF1D2
-              A846B5B6D11CFD4926E4567F75088AD32FD739C6FB39DB618772A099A14DB865
-              BE12D3C8435EF27448CFE9EA2F57812EF3F9413FBD1568FC03F321CCAED08ABE
-              043A9543F3445A9705D25E9E63EDCF0F8161E6036D0526794C6EAF656B222D35
-              F71BBD34D61C969503A3CC272C26D398EC71BA34AAA136BE9284BC9D2E0F7545
-              1FF9BAFF7A28CBFCB4B525F4BB2662CFBFFACBA3E8CFA059E20F38FB3E86DDB4
-              7637ED497DCA49C338220F79D1DDD862D230C9D6F843310D86FFE44FE9755F3E
-              E6D91AFF6CD8666B50A9FC06C33DEAC7B788F21A0000000049454E44AE426082}
+              03B6494441545847ED98394F15511886EF0248A2345A112D301AB5A0728985B8
+              C412B7441B6345C30FB0C03FA095D1CA18A533B1B026C4D091A8B122DA69A401
+              8D41B423B884F5E2F39E79EF38CBBD30203198F0242773CEF7BDDF7B6639F7CC
+              40699BFF8DB28F85595959A9D04ED12E313C51ABD5F62E2F2F772A57AD56A72B
+              95CA14DDB172B93C4C7B4DAB29B7E930F10EDAADF9F9F96F9C4C21A4558D6A6D
+              B33960786D6161E193E75937AA9587ED360E5E651EC7EDB9B9B95A641DC1049F
+              893F64920BB4838476A9A9AF9872D204B19187BCE8AE7B99045488C1B3E06678
+              045F98B09F6ED5B2A64823AD6A42B1B1E7FA4F8AC23B914504E36126E870BA30
+              AA51AD6D02F276BA18985C4D3E260C1E70A8381D83EEFAD2D2D20BB4DFD5D457
+              CCE918D5DA23206FCDE1F4EAA06F4F2E605F5DEA641897694F946F8272A9C7C2
+              582715DF29CFD1EE747338F381A824144D31CE3D2662372D698A3496C7C84B9E
+              964833E05463D05458845F237928E8772A867035B91771D54FD175AAA9EF70D8
+              8338E416BF3C2345D068AEDC528821D91394E09F6D23C3EE48111BB639A5FAB6
+              CC05753B1543B86AEF3A3D4E05526787C11577F51A1862DB5FF630C94E1FC3AB
+              02CD828725F515F350C4DA3AF294B787A93945F6761DF35185CFDDCD32C15D08
+              EF277E55DD181E0F51505F31F5AD99503F4BC63B9E33C7E2E2E207DF46DDEE43
+              0EE760AD8C58A69FF00FC6836AEA3BACB53562790E795BB6A2391DCE83E1AC75
+              3AA1A69B20B9C3486622654366A4B13C87BCADD305CD3A1C68BAC2F5ACDDCDC1
+              27C6385E67B90BEF1C8A514C39691CCAB19A776AF3D2ED6B6969A95FD97E0A3F
+              BADF1026AED2CED03D1A454A6FA979B9DA84829A2E0E93EAB3E6C65B5B5B8FA8
+              9F83AB1B451CE0B65E7478D391B7A7D15A1B7538907D646F7CD4559C77B72968
+              5A695D4C7092E3398E071473BA2919EF78CE1C08931BA3B6F878D3ABC3A4A7B9
+              AABBDCEA572CC85F91FA0F8A29278DB42E8B41D2967C7D406A634C4132F5EA80
+              3EA77422375863EF1D2F8C6A546B1BCDD117650ABC3A04C5F1CB958269C6FBB8
+              DA218772E835C01D1953CBBC1252C8435EF27448EB74F597AB4097FAFC48EE4D
+              82F14FCC0731BB4C6BF425D0A11C9AC7D2BA2C90F4F21C6B7F7E080C531F6875
+              98E411B93D96AD89B4D4DCCB7A69AC392C2B0646A94F58D6C22426BB9D2E8C6A
+              B4BFD926206FA78B435DA38F7C3D7F2DCA223F6D6D097DC93523ECF9577F7934
+              FA33688AF87DAEBE976117ADDD4D7B52AF72D2308E9187BCE86EEC649230C9D6
+              F843310986FFE44FE975DF3EE6D91AFF6CD8666B502AFD06487ACAC1FFC8E77A
+              0000000049454E44AE426082}
             FileName = 
               'C:\Projetos\Simplex\App\Resources\Material\outline_account_circl' +
               'e_white_18dp.png'
@@ -141,7 +256,7 @@ object frmMain: TfrmMain
       object lblUsuario: TLabel
         Align = Right
         StyledSettings = [Family, Size, Style]
-        Position.X = 72.000000000000000000
+        Position.X = 129.000000000000000000
         Size.Width = 121.000000000000000000
         Size.Height = 64.000000000000000000
         Size.PlatformDefault = False
@@ -151,7 +266,7 @@ object frmMain: TfrmMain
     end
     object ListBox1: TListBox
       Align = Client
-      Size.Width = 193.000000000000000000
+      Size.Width = 250.000000000000000000
       Size.Height = 335.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
@@ -160,7 +275,7 @@ object frmMain: TfrmMain
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
-      Viewport.Width = 193.000000000000000000
+      Viewport.Width = 250.000000000000000000
       Viewport.Height = 335.000000000000000000
       object ESTOQUE: TListBoxItem
         ImageIndex = 0

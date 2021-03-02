@@ -28,6 +28,17 @@ type
     btnEntrar: TRectangle;
     btnSair: TRectangle;
     lblUsuario: TLabel;
+    ScaledLayout2: TScaledLayout;
+    GridLayout1: TGridLayout;
+    Layout3: TLayout;
+    btnLogin: TRectangle;
+    lblNovoLogin: TLabel;
+    Layout4: TLayout;
+    btnEstoque: TRectangle;
+    lblEstoque: TLabel;
+    Layout5: TLayout;
+    btnConfiguracoes: TRectangle;
+    lblConfiguracao: TLabel;
     procedure ESTOQUEClick(Sender: TObject);
     procedure CONFIGURACAOClick(Sender: TObject);
     procedure btnEntrarClick(Sender: TObject);
@@ -75,8 +86,17 @@ end;
 procedure TfrmMain.ESTOQUEClick(Sender: TObject);
 begin
   MultiView1.HideMaster;
-  frmEstoque := TfrmEstoque.Create(Self);
+
+  if frmMain.LoginSucessfull = False then
+  begin
+  frmLogin := TfrmLogin.Create(Self);
+  frmLogin.Show;
+  end
+  else
+  begin
+    frmEstoque := TfrmEstoque.Create(Self);
   frmEstoque.Show;
+  end;
 end;
 
 end.
