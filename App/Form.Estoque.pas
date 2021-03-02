@@ -15,11 +15,8 @@ type
     SpeedButton1: TSpeedButton;
     Label1: TLabel;
     rectBottom: TRectangle;
-    rectTop: TRectangle;
-    Layout1: TLayout;
     btnPesquisar: TSpeedButton;
     btnCodBarras: TSpeedButton;
-    rectSearch: TLayout;
     edtProduto: TEdit;
     Label2: TLabel;
     layQtd: TLayout;
@@ -43,6 +40,10 @@ type
     SpeedButton2: TSpeedButton;
     Layout5: TLayout;
     VScroll: TVertScrollBox;
+    layTop: TLayout;
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    Rectangle3: TRectangle;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);

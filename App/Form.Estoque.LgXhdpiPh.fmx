@@ -13,17 +13,14 @@ inherited frmEstoque_LgXhdpiPh: TfrmEstoque_LgXhdpiPh
         Size.Width = 402.000000000000000000
       end
     end
-    inherited rectTop: TRectangle
-      Size.Width = 450.000000000000000000
-      inherited Layout1: TLayout
-        Position.X = 317.000000000000000000
-      end
-    end
     inherited ListBox1: TListBox
       Size.Width = 450.000000000000000000
-      Size.Height = 539.000000000000000000
+      Size.Height = 547.000000000000000000
       Viewport.Width = 450.000000000000000000
-      Viewport.Height = 539.000000000000000000
+      Viewport.Height = 547.000000000000000000
+      inherited CODIGO_INTERNO: TListBoxItem
+        ImageIndex = 0
+      end
     end
     inherited Layout3: TLayout
       Position.Y = 645.000000000000000000
@@ -38,8 +35,17 @@ inherited frmEstoque_LgXhdpiPh: TfrmEstoque_LgXhdpiPh
         end
       end
     end
-    inherited Label2: TLabel
+    inherited layTop: TLayout
       Size.Width = 450.000000000000000000
+      inherited Rectangle1: TRectangle
+        Size.Width = 323.000000000000000000
+        inherited Label2: TLabel
+          Size.Width = 323.000000000000000000
+        end
+      end
+      inherited Rectangle3: TRectangle
+        Position.X = 323.000000000000000000
+      end
     end
   end
 end

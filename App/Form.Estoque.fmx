@@ -43,68 +43,19 @@ object frmEstoque: TfrmEstoque
         TabOrder = 1
       end
     end
-    object rectTop: TRectangle
-      Align = Top
-      Position.Y = 65.000000000000000000
-      Size.Width = 391.000000000000000000
-      Size.Height = 41.000000000000000000
-      Size.PlatformDefault = False
-      object Layout1: TLayout
-        Align = Right
-        Position.X = 258.000000000000000000
-        Size.Width = 133.000000000000000000
-        Size.Height = 41.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        object btnPesquisar: TSpeedButton
-          Align = Right
-          Position.X = 85.000000000000000000
-          Size.Width = 48.000000000000000000
-          Size.Height = 48.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'searchtoolbutton'
-          Text = 'btnPesquisar'
-          OnClick = btnPesquisarClick
-        end
-        object btnCodBarras: TSpeedButton
-          Align = Left
-          ControlType = Platform
-          Size.Width = 48.000000000000000000
-          Size.Height = 48.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'cameratoolbutton'
-          Text = 'btnCodBarras'
-          OnClick = btnCodBarrasClick
-        end
-      end
-      object rectSearch: TLayout
-        Align = Left
-        Size.Width = 217.000000000000000000
-        Size.Height = 41.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object edtProduto: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Client
-          TabOrder = 0
-          Size.Width = 217.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-        end
-      end
-    end
     object ListBox1: TListBox
       Align = Client
       Size.Width = 391.000000000000000000
-      Size.Height = 479.000000000000000000
+      Size.Height = 487.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 2
+      TabOrder = 1
       DisableFocusEffect = True
+      Images = frmMain.ImageList1
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       Viewport.Width = 391.000000000000000000
-      Viewport.Height = 479.000000000000000000
+      Viewport.Height = 487.000000000000000000
       object CODIGO_INTERNO: TListBoxItem
         ItemData.Detail = 'werwre'
         TabOrder = 0
@@ -142,7 +93,7 @@ object frmEstoque: TfrmEstoque
       Size.Width = 391.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 3
+      TabOrder = 2
       object Layout4: TLayout
         Align = Right
         Position.X = 341.000000000000000000
@@ -242,14 +193,76 @@ object frmEstoque: TfrmEstoque
         end
       end
     end
-    object Label2: TLabel
+    object layTop: TLayout
       Align = Top
       Position.Y = 48.000000000000000000
       Size.Width = 391.000000000000000000
-      Size.Height = 17.000000000000000000
+      Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      Text = 'Pesquisa Produto'
-      TabOrder = 4
+      TabOrder = 3
+      object Rectangle1: TRectangle
+        Align = Client
+        Fill.Color = claBlack
+        Size.Width = 264.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        object Label2: TLabel
+          Align = Top
+          StyledSettings = [Family, Size, Style]
+          Size.Width = 264.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claWhite
+          Text = 'Pesquisa Produto'
+          TabOrder = 0
+        end
+        object Rectangle2: TRectangle
+          Align = Left
+          Fill.Color = claWhite
+          Position.Y = 17.000000000000000000
+          Size.Width = 217.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          object edtProduto: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Size.Width = 217.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object Rectangle3: TRectangle
+        Align = Right
+        Fill.Color = claBlack
+        Position.X = 264.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        object btnCodBarras: TSpeedButton
+          Align = Left
+          ControlType = Platform
+          Position.Y = 1.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'cameratoolbutton'
+          Text = 'btnCodBarras'
+          OnClick = btnCodBarrasClick
+        end
+        object btnPesquisar: TSpeedButton
+          Align = Right
+          Position.X = 79.000000000000000000
+          Position.Y = 1.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'searchtoolbutton'
+          Text = 'btnPesquisar'
+          OnClick = btnPesquisarClick
+        end
+      end
     end
   end
   object ImageList1: TImageList
