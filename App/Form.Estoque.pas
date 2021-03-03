@@ -103,7 +103,7 @@ begin
   begin
 
       try
-        objAPI.postEstoque( StrToInt(edtProduto.Text), StrToFloat(edtQuantidade.Text), frmMain.CodEmpresa  );
+        objAPI.postEstoque( Fprod, StrToFloat(edtQuantidade.Text), frmMain.CodEmpresa  );
         Clear;
       except on E :Exception do
         begin

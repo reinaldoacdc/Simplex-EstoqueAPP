@@ -80,7 +80,7 @@ begin
     if resp.GetStatusCode = 200 then
       Result := True;
   except
-
+    Result := False;
   end;
 end;
 
@@ -94,9 +94,8 @@ begin
 
   FJSonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
   estoque := Tjson.JsonToObject<TESTOQUE>(FJSonObject);
-  estoque.USUARIO := 'SUPORTE';
+  estoque.USUARIO    := ConfigINI.AcessoBanco.OperadorNome;
   estoque.QUANTIDADE := qtdade;
-
 
 
   Url := Format('http://%s/estoque', [ConfigINI.AcessoBanco.URL_API]);

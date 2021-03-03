@@ -43,6 +43,10 @@ begin
       .&End
     .Find(TObject(Estoque));
 
+
+    Estoque.CODIGO_PRODUTO := StrToInt(codpro);
+    Estoque.CODIGO_EMPRESA := StrToInt(codempresa);
+
     Res.Send<TJSONObject>(Estoque.ToJSONObject);
   except on E :Exception do
     Res.Status(500).Send('Error: ' + E.Message);
