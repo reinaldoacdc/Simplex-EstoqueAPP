@@ -51,9 +51,12 @@ type
       private
         FAcessoBanco :TConfigIniAcessoBanco;
     function getAcessoBanco: TConfigIniAcessoBanco;
+    function getUsaAppLeitorCodBarras: Boolean;
+    procedure setUsaAppLeitorCodBarras(const Value: Boolean);
       public
       published
         property AcessoBanco :TConfigIniAcessoBanco read getAcessoBanco;
+        property UsaAppLeitorCodBarras :Boolean read getUsaAppLeitorCodBarras write setUsaAppLeitorCodBarras;
   end;
 
 var ConfigINI :TConfigIni;
@@ -158,6 +161,16 @@ end;
 function TConfigIni.getAcessoBanco: TConfigIniAcessoBanco;
 begin
   Result := TConfigIniAcessoBanco.Create(Self);
+end;
+
+function TConfigIni.getUsaAppLeitorCodBarras: Boolean;
+begin
+  Result := Self.ReadBool('Config', 'UsaAppLeitorCodBarras', False);
+end;
+
+procedure TConfigIni.setUsaAppLeitorCodBarras(const Value: Boolean);
+begin
+  Self.WriteBool('Config', 'UsaAppLeitorCodBarras', Value);
 end;
 
 initialization

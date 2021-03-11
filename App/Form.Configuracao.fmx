@@ -4,63 +4,19 @@ object frmConfiguracao: TfrmConfiguracao
   Caption = 'Form2'
   ClientHeight = 481
   ClientWidth = 299
+  Fill.Color = claDeepskyblue
+  Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnShow = FormShow
   DesignerMasterStyle = 3
-  object Layout1: TLayout
-    Align = Client
-    Size.Width = 299.000000000000000000
-    Size.Height = 433.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    object Layout2: TLayout
-      Align = Bottom
-      Position.Y = 352.000000000000000000
-      Size.Width = 299.000000000000000000
-      Size.Height = 81.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-      object SpeedButton1: TSpeedButton
-        Align = Center
-        Images = ImageList1
-        ImageIndex = 0
-        Scale.X = 2.000000000000000000
-        Scale.Y = 2.000000000000000000
-        Size.Width = 20.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        OnClick = SpeedButton1Click
-      end
-    end
-    object Label1: TLabel
-      Align = Top
-      StyledSettings = [Family, Style, FontColor]
-      Size.Width = 299.000000000000000000
-      Size.Height = 41.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.Font.Size = 20.000000000000000000
-      Text = 'IP Servidor'
-      TabOrder = 2
-    end
-    object URL_API: TEdit
-      Touch.InteractiveGestures = [LongTap, DoubleTap]
-      TabOrder = 0
-      Position.X = 6.000000000000000000
-      Position.Y = 48.000000000000000000
-      Margins.Left = 150.000000000000000000
-      Margins.Right = 10.000000000000000000
-      Size.Width = 259.000000000000000000
-      Size.Height = 32.000000000000000000
-      Size.PlatformDefault = False
-    end
-  end
   object ToolBar1: TToolBar
     Size.Width = 299.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 2
+    TintColor = claDeepskyblue
     object SpeedButton2: TSpeedButton
       Align = Left
       Size.Width = 48.000000000000000000
@@ -71,12 +27,87 @@ object frmConfiguracao: TfrmConfiguracao
     end
     object Label2: TLabel
       Align = Client
+      StyledSettings = [Family, Size, Style]
       Size.Width = 251.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
+      TextSettings.FontColor = claWhite
       TextSettings.HorzAlign = Center
       Text = 'Configura'#231#227'o'
       TabOrder = 1
+    end
+  end
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 20.000000000000000000
+    Size.Width = 279.000000000000000000
+    Size.Height = 413.000000000000000000
+    Size.PlatformDefault = False
+    object Layout1: TLayout
+      Align = Client
+      Size.Width = 279.000000000000000000
+      Size.Height = 413.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Layout2: TLayout
+        Align = Bottom
+        Position.Y = 332.000000000000000000
+        Size.Width = 279.000000000000000000
+        Size.Height = 81.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object SpeedButton1: TSpeedButton
+          Align = Center
+          Images = ImageList1
+          ImageIndex = 0
+          Scale.X = 2.000000000000000000
+          Scale.Y = 2.000000000000000000
+          Size.Width = 20.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = SpeedButton1Click
+        end
+      end
+      object Label1: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Size.Width = 279.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        Text = 'IP Servidor'
+        TabOrder = 3
+      end
+      object URL_API: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 6.000000000000000000
+        Position.Y = 48.000000000000000000
+        Margins.Left = 150.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Size.Width = 259.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Switch1: TSwitch
+        IsChecked = False
+        Position.X = 16.000000000000000000
+        Position.Y = 120.000000000000000000
+        TabOrder = 4
+      end
+      object Label3: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.Y = 81.000000000000000000
+        Size.Width = 279.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        Text = 'Usa App Leitor CodBarras'
+        TabOrder = 2
+      end
     end
   end
   object ImageList1: TImageList

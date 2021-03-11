@@ -7,54 +7,60 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Edit, FMX.ListBox,
-  System.ImageList, FMX.ImgList, FMX.Ani, u99Permissions;
+  FMX.Ani, u99Permissions;
 
 type
   TfrmEstoque = class(TForm)
     ToolBar1: TToolBar;
     SpeedButton1: TSpeedButton;
     Label1: TLabel;
-    rectBottom: TRectangle;
-    btnPesquisar: TSpeedButton;
-    btnCodBarras: TSpeedButton;
-    edtProduto: TEdit;
-    Label2: TLabel;
-    layQtd: TLayout;
-    lblQuantidade: TLabel;
-    layEdit: TLayout;
-    edtQuantidade: TEdit;
+    lblCodFabr: TLabel;
     ListBox1: TListBox;
+    layoutContagem: TLayout;
+    VScroll: TVertScrollBox;
+    layoutTop: TLayout;
+    rectEdits: TRectangle;
+    rectButtons: TRectangle;
+    rectBottom: TRectangle;
+    layoutCodFabr: TLayout;
+    rectTop: TRectangle;
+    layoutEditCodFabr: TLayout;
+    rectEditCodFabr: TRectangle;
+    edtCodFabr: TEdit;
+    layoutCodInterno: TLayout;
+    lblCodInterno: TLabel;
+    layoutEditCodInterno: TLayout;
+    rectCodInterno: TRectangle;
+    edtCodInterno: TEdit;
+    layoutCodBarras: TLayout;
+    lblCodBarras: TLabel;
+    layoutEditCodBarras: TLayout;
+    rectBgCodBarras: TRectangle;
+    edtCodBarras: TEdit;
+    lblContagem: TLabel;
+    layoutQuantidade: TLayout;
+    rectQuantidade: TRectangle;
+    edtQuantidade: TEdit;
+    btnVoltar: TRectangle;
+    lblSair: TLabel;
+    Image1: TImage;
+    Image2: TImage;
     CODIGO_INTERNO: TListBoxItem;
     REF_FABRICANTE: TListBoxItem;
     REF_INTERNA: TListBoxItem;
     DESCRICAO: TListBoxItem;
     ESTOQUE: TListBoxItem;
     FORNECEDOR: TListBoxItem;
-    ImageList1: TImageList;
-    AnimaBottom: TFloatAnimation;
-    layButton: TLayout;
-    btnAtualizar: TButton;
-    Layout3: TLayout;
-    Layout4: TLayout;
-    Circle1: TCircle;
-    SpeedButton2: TSpeedButton;
-    Layout5: TLayout;
-    VScroll: TVertScrollBox;
-    layTop: TLayout;
-    Rectangle1: TRectangle;
-    Rectangle2: TRectangle;
-    Rectangle3: TRectangle;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormVirtualKeyboardHidden(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure edtQuantidadeEnter(Sender: TObject);
-    procedure btnCodBarrasClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure edtCodBarrasEnter(Sender: TObject);
   private
     Fprod :Integer;
     foco : TControl;
@@ -121,27 +127,26 @@ begin
   end).Start;
 end;
 
-procedure TfrmEstoque.btnCodBarrasClick(Sender: TObject);
-begin
-    if NOT permissao.VerifyCameraAccess then
-        permissao.Camera(nil, nil)
-    else
-    begin
-        FrmCamera.ShowModal(procedure(ModalResult: TModalResult)
-        begin
-            edtProduto.Text := FrmCamera.codigo;
-        end);
-    end;
-end;
-
 procedure TfrmEstoque.btnPesquisarClick(Sender: TObject);
 var
-  idPesquisa :String;
+  idPesquisa, error :String;
   prod :TPRODUTOS;
 begin
-  idPesquisa := edtProduto.Text;
+  idPesquisa := edtCodFabr.Text;
+  error := '';
   TLoading.Show(Self, 'Consultando...');
 
+
+//      Fprod := 0;
+//      try
+//        prod := objAPI.getProduto(idPesquisa, frmMain.CodEmpresa);
+//        Load(prod);
+//      except on E :Exception do
+//        begin
+//         TToast.New(Self).Error('Erro: ' + E.Message);
+//         TLoading.Hide;
+//        end;
+//      end;
 
   TThread.CreateAnonymousThread(procedure
   begin
@@ -150,15 +155,18 @@ begin
         prod := objAPI.getProduto(idPesquisa, frmMain.CodEmpresa);
         Load(prod);
       except on E :Exception do
-//        begin
-//         TToast.New(Self).Error('Erro: ' + E.Message);
-//         TLoading.Hide;
-//        end;
+        begin
+         error := E.Message;
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
+        if error <> '' then
+           TToast.New(Self).Error('Erro: ' + error);
         if Fprod = 0 then
           TToast.New(Self).Error('Produto não encontrado');
       end);
@@ -169,9 +177,24 @@ end;
 procedure TfrmEstoque.Clear;
 begin
   Fprod := 0;
-  edtProduto.Text := '';
+  edtCodFabr.Text := '';
+  edtCodBarras.Text := '';
+  edtCodInterno.Text := '';
   edtQuantidade.Text := '';
-  ListBox1.Visible := False;
+  //ListBox1.Visible := False;
+end;
+
+procedure TfrmEstoque.edtCodBarrasEnter(Sender: TObject);
+begin
+    if NOT permissao.VerifyCameraAccess then
+        permissao.Camera(nil, nil)
+    else
+    begin
+        FrmCamera.ShowModal(procedure(ModalResult: TModalResult)
+        begin
+            edtCodBarras.Text := FrmCamera.codigo;
+        end);
+    end;
 end;
 
 procedure TfrmEstoque.edtQuantidadeEnter(Sender: TObject);
@@ -205,7 +228,7 @@ procedure TfrmEstoque.Load(prod :TPRODUTOS);
 begin
   Fprod := prod.CODPRO;
 
-  CODIGO_INTERNO.Text :=  'CODIGO_INTERNO: ' + IntToStr(prod.CODPRO);
+  CODIGO_INTERNO.Text := 'CODIGO_INTERNO: ' + IntToStr(prod.CODPRO);
   REF_FABRICANTE.Text := 'REF_FABRICANTE: ' + prod.CODPROFABR;
   REF_INTERNA.Text    := 'REF_INTERNA: ' + prod.REFERENCIAINTERNA;
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
@@ -217,16 +240,6 @@ end;
 procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);
 begin
   Self.Close;
-end;
-
-procedure TfrmEstoque.SpeedButton2Click(Sender: TObject);
-begin
-  rectBottom.Visible := not(rectBottom.Visible);
-  AnimaBottom.StartValue := Self.Width + 100;
-  AnimaBottom.StopValue := 0;
-  AnimaBottom.Start;
-
-  edtQuantidade.SetFocus;
 end;
 
 end.

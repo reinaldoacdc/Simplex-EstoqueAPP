@@ -74,16 +74,16 @@ begin
 
   carga.CODIGO_MOVIMENTO := getUltimoCodigoMovimento(codpro, codempresa) +1;
   carga.DATA := Date;
-  carga.HISTORICO := 'Atualização via APP de contagem';
+  carga.HISTORICO := 'ATUALIZAÇÃO VIA APP DE CONTAGEM';
   carga.CODIGO_PRODUTO := StrToInt(codpro);
   carga.CODIGO_EMPRESA := StrToInt(codempresa);
 
   //
   carga.USUARIO := json.GetValue('USUARIO').Value;
 
-  carga.QUANTIDADE := quantidade;
+  carga.QUANTIDADE := quantidade - qtd_anterior;
   carga.ESTOQUE_ANTERIOR := qtd_anterior;
-  carga.ESTOQUE_ATUAL := qtd_atual;
+  carga.ESTOQUE_ATUAL := quantidade; //qtd_atual;
   try
     FDAO.Insert(carga);
     Res.Status(200).Send('OK');

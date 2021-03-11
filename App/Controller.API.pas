@@ -63,7 +63,8 @@ begin
   Url := Format('http://%s/produto?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
   JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
 
-  FJSonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
+  //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;
+  FJSonObject := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
   Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
 end;
 
@@ -77,6 +78,8 @@ begin
 
   try
     resp := FNetHTTPRequest.Get(Url);
+
+
     if resp.GetStatusCode = 200 then
       Result := True;
   except
@@ -105,6 +108,7 @@ end;
 constructor TApi.Create;
 begin
   inherited;
+  FJSonObject := TJSonObject.Create;
   FNetHTTPClient  := TNetHTTPClient.Create(nil);
   FNetHTTPRequest := TNetHTTPRequest.Create(nil);
   FNetHTTPRequest.Client := FNetHTTPClient;
@@ -114,6 +118,7 @@ destructor TApi.Destroy;
 begin
   FNetHTTPRequest.Free;
   FNetHttpClient.Free;
+  FJsonObject.Free;
   inherited;
 end;
 

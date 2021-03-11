@@ -28,14 +28,17 @@ type
     layEmpresa: TLayout;
     rectEmpresa: TRectangle;
     ComboBox1: TComboBox;
+    ToolBar1: TToolBar;
+    Label1: TLabel;
+    Rectangle3: TRectangle;
     procedure lblLogarClick(Sender: TObject);
-    procedure NameEditKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
     procedure NameEditKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ComboBox1Exit(Sender: TObject);
     procedure ComboBox1Enter(Sender: TObject);
+    procedure PasswordEditKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
   private
     function getCodEmpresa :Integer;
   public
@@ -106,29 +109,36 @@ begin
 
       TThread.Synchronize(nil, procedure
       begin
-        TLoading.Hide;
-       if frmMain.LoginSucessfull then
-       begin
+        if frmMain.LoginSucessfull then
+        begin
+          Self.Hide;
+
+          frmMain.Show;
           frmMain.lblUsuario.Text := NameEdit.Text;
-          Self.close;
-        end;
+          TLoading.Hide;
+        end
+        else
+        begin
+          TLoading.Hide;
+          TToast.New(Self).Error('Erro ao tentar fazer login.');
+        end
       end);
 
   end).Start;
 end;
 
-procedure TfrmLogin.NameEditKeyDown(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-begin
-  if Key = vkReturn then
-    PasswordEdit.SetFocus;
-end;
-
 procedure TfrmLogin.NameEditKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
-  if Key = vkReturn then
+  if Key = 0 then
     PasswordEdit.SetFocus;
+end;
+
+procedure TfrmLogin.PasswordEditKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = 0 then
+    ComboBox1.SetFocus;
 end;
 
 end.

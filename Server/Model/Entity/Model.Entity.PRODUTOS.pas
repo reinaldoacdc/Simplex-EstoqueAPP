@@ -9,16 +9,25 @@ type
   [Tabela('VIEW_PRODUTOS')]
   TPRODUTOS = class
   private
+    [JsonName('CODPROFABR')]
     FCODPROFABR: String;
+    [JsonName('lOCAL_ESTOQUE')]
     FLOCAL_ESTOQUE: String;
+    [JsonName('DESCRICAO')]
     FDESCRICAO: String;
+    [JsonName('CODFABR')]
     FCODFABR: Integer;
+    [JsonName('CODEMPRESA')]
     FCODEMPRESA: Integer;
+    [JsonName('ESTOQUE')]
     FESTOQUE: Double;
     [JsonName('CODIGO_PRODUTO')]
     FCODPRO: Integer;
+    [JsonName('REFERENCIAINTERNA')]
     FREFERENCIAINTERNA: String;
+    [JsonName('UNIDADE')]
     FUNIDADE: String;
+    [JsonName('INFORMACAO_COMPLEMENTAR')]
     FINFORMACAO_COMPLEMENTAR: String;
   public
     function ToJSONObject: TJsonObject;

@@ -19,6 +19,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmEstoque, frmEstoque);
   Application.CreateForm(TfrmConfiguracao, frmConfiguracao);

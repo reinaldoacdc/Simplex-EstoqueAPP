@@ -2,37 +2,197 @@ object frmLogin: TfrmLogin
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 460
-  ClientWidth = 430
+  ClientHeight = 616
+  ClientWidth = 482
+  Fill.Color = claDeepskyblue
+  Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
   DesignerMasterStyle = 3
-  object LayoutBody: TLayout
-    Align = Center
-    Margins.Left = 20.000000000000000000
-    Margins.Right = 20.000000000000000000
-    Size.Width = 356.000000000000000000
-    Size.Height = 259.000000000000000000
+  object ToolBar1: TToolBar
+    Size.Width = 482.000000000000000000
+    Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
-    object rectLogin: TRectangle
-      Align = Top
-      Margins.Left = 10.000000000000000000
-      Margins.Right = 10.000000000000000000
-      Position.X = 10.000000000000000000
-      Position.Y = 98.000000000000000000
-      Size.Width = 336.000000000000000000
-      Size.Height = 223.000000000000000000
+    TabOrder = 1
+    TintColor = claDeepskyblue
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, Style]
+      Size.Width = 482.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
-      object LayoutRect: TLayout
-        Align = Client
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Simplex Mobile Tools'
+      TabOrder = 0
+    end
+  end
+  object Rectangle3: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 20.000000000000000000
+    Size.Width = 462.000000000000000000
+    Size.Height = 548.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Cap = Round
+    Stroke.Join = Round
+    object LayoutBody: TLayout
+      Align = Center
+      Margins.Left = 20.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Size.Width = 356.000000000000000000
+      Size.Height = 259.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object rectLogin: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 98.000000000000000000
         Size.Width = 336.000000000000000000
-        Size.Height = 168.000000000000000000
+        Size.Height = 223.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
-        object lblSenha: TLabel
+        Stroke.Kind = None
+        Stroke.Cap = Round
+        object LayoutRect: TLayout
+          Align = Client
+          Size.Width = 336.000000000000000000
+          Size.Height = 168.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lblSenha: TLabel
+            Align = Top
+            Margins.Top = 5.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 336.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'SENHA'
+            TabOrder = 0
+          end
+          object btnLogin: TRectangle
+            Align = Bottom
+            Fill.Color = claDeepskyblue
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Position.Y = 127.000000000000000000
+            Size.Width = 316.000000000000000000
+            Size.Height = 31.000000000000000000
+            Size.PlatformDefault = False
+            OnClick = lblLogarClick
+            object lblLogar: TLabel
+              Align = Client
+              StyledSettings = [Family, Size, Style]
+              Size.Width = 316.000000000000000000
+              Size.Height = 31.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.FontColor = claWhite
+              TextSettings.HorzAlign = Center
+              Text = 'Entrar'
+              TabOrder = 3
+              OnClick = lblLogarClick
+            end
+          end
+          object laySenha: TLayout
+            Align = Top
+            Position.Y = 22.000000000000000000
+            Size.Width = 336.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            object Rectangle2: TRectangle
+              Align = Client
+              Fill.Color = claLightskyblue
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Size.Width = 316.000000000000000000
+              Size.Height = 33.000000000000000000
+              Size.PlatformDefault = False
+              object PasswordEdit: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 2
+                ReturnKeyType = Next
+                Password = True
+                Size.Width = 316.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+                CharCase = ecUpperCase
+                OnKeyUp = PasswordEditKeyUp
+              end
+            end
+          end
+          object layEmpresa: TLayout
+            Align = Bottom
+            Position.Y = 84.000000000000000000
+            Size.Width = 336.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object rectEmpresa: TRectangle
+              Align = Client
+              Fill.Color = claLightskyblue
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Size.Width = 316.000000000000000000
+              Size.Height = 33.000000000000000000
+              Size.PlatformDefault = False
+              object ComboBox1: TComboBox
+                Align = Client
+                Size.Width = 316.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'comboboxstyle'
+                TabOrder = 3
+                OnEnter = ComboBox1Enter
+                OnExit = ComboBox1Exit
+              end
+            end
+          end
+        end
+        object layUsuario: TLayout
+          Align = Top
+          Position.Y = 22.000000000000000000
+          Size.Width = 336.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object Rectangle1: TRectangle
+            Align = Client
+            Fill.Color = claLightskyblue
+            Margins.Left = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Size.Width = 316.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            object NameEdit: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 1
+              ReturnKeyType = Next
+              Padding.Top = 5.000000000000000000
+              Padding.Bottom = 5.000000000000000000
+              Size.Width = 316.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              KillFocusByReturn = True
+              CharCase = ecUpperCase
+              OnKeyUp = NameEditKeyUp
+            end
+          end
+        end
+        object lblUsuario: TLabel
           Align = Top
           Margins.Top = 5.000000000000000000
           Position.Y = 5.000000000000000000
@@ -40,158 +200,35 @@ object frmLogin: TfrmLogin
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.HorzAlign = Center
-          Text = 'SENHA'
-          TabOrder = 0
-        end
-        object btnLogin: TRectangle
-          Align = Bottom
-          Fill.Color = claBlack
-          Margins.Left = 10.000000000000000000
-          Margins.Top = 10.000000000000000000
-          Margins.Right = 10.000000000000000000
-          Margins.Bottom = 10.000000000000000000
-          Position.X = 10.000000000000000000
-          Position.Y = 127.000000000000000000
-          Size.Width = 316.000000000000000000
-          Size.Height = 31.000000000000000000
-          Size.PlatformDefault = False
-          OnClick = lblLogarClick
-          object lblLogar: TLabel
-            Align = Client
-            StyledSettings = [Family, Size, Style]
-            Size.Width = 316.000000000000000000
-            Size.Height = 31.000000000000000000
-            Size.PlatformDefault = False
-            TextSettings.FontColor = claWhite
-            TextSettings.HorzAlign = Center
-            Text = 'Entrar'
-            TabOrder = 3
-            OnClick = lblLogarClick
-          end
-        end
-        object laySenha: TLayout
-          Align = Top
-          Position.Y = 22.000000000000000000
-          Size.Width = 336.000000000000000000
-          Size.Height = 33.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 3
-          object Rectangle2: TRectangle
-            Align = Client
-            Fill.Color = claWhite
-            Margins.Left = 10.000000000000000000
-            Margins.Right = 10.000000000000000000
-            Size.Width = 316.000000000000000000
-            Size.Height = 33.000000000000000000
-            Size.PlatformDefault = False
-            object PasswordEdit: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              StyleLookup = 'editstyle'
-              TabOrder = 2
-              ReturnKeyType = Next
-              Password = True
-              Size.Width = 316.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-            end
-          end
-        end
-        object layEmpresa: TLayout
-          Align = Bottom
-          Position.Y = 84.000000000000000000
-          Size.Width = 336.000000000000000000
-          Size.Height = 33.000000000000000000
-          Size.PlatformDefault = False
+          Text = 'USUARIO'
           TabOrder = 2
-          object rectEmpresa: TRectangle
-            Align = Client
-            Fill.Color = claWhite
-            Margins.Left = 10.000000000000000000
-            Margins.Right = 10.000000000000000000
-            Size.Width = 316.000000000000000000
-            Size.Height = 33.000000000000000000
-            Size.PlatformDefault = False
-            object ComboBox1: TComboBox
-              Align = Client
-              Size.Width = 316.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'comboboxstyle'
-              TabOrder = 2
-              OnEnter = ComboBox1Enter
-              OnExit = ComboBox1Exit
-            end
-          end
         end
       end
-      object layUsuario: TLayout
+      object lblLOGIN: TLabel
         Align = Top
-        Position.Y = 22.000000000000000000
-        Size.Width = 336.000000000000000000
-        Size.Height = 33.000000000000000000
+        StyledSettings = [Family, FontColor]
+        Size.Width = 356.000000000000000000
+        Size.Height = 73.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
-        object Rectangle1: TRectangle
-          Align = Client
-          Fill.Color = claWhite
-          Margins.Left = 10.000000000000000000
-          Margins.Right = 10.000000000000000000
-          Size.Width = 316.000000000000000000
-          Size.Height = 33.000000000000000000
-          Size.PlatformDefault = False
-          object NameEdit: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Client
-            TabOrder = 1
-            ReturnKeyType = Next
-            Padding.Top = 5.000000000000000000
-            Padding.Bottom = 5.000000000000000000
-            Size.Width = 316.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            CharCase = ecUpperCase
-            OnKeyDown = NameEditKeyDown
-            OnKeyUp = NameEditKeyUp
-          end
-        end
-      end
-      object lblUsuario: TLabel
-        Align = Top
-        Margins.Top = 5.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 336.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
+        TextSettings.Font.Size = 36.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
         TextSettings.HorzAlign = Center
-        Text = 'USUARIO'
-        TabOrder = 2
+        Text = 'Simplex'
+        TabOrder = 1
       end
-    end
-    object lblLOGIN: TLabel
-      Align = Top
-      StyledSettings = [Family, FontColor]
-      Size.Width = 356.000000000000000000
-      Size.Height = 73.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.Font.Size = 36.000000000000000000
-      TextSettings.Font.StyleExt = {00070000000000000004000000}
-      TextSettings.HorzAlign = Center
-      Text = 'Simplex'
-      TabOrder = 1
-    end
-    object Label4: TLabel
-      Align = Top
-      StyledSettings = [Family, FontColor]
-      Position.Y = 73.000000000000000000
-      Size.Width = 356.000000000000000000
-      Size.Height = 25.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.Font.Size = 18.000000000000000000
-      TextSettings.Font.StyleExt = {00070000000000000004000000}
-      TextSettings.HorzAlign = Center
-      Text = 'Tela de Acesso'
-      TabOrder = 0
+      object Label4: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Position.Y = 73.000000000000000000
+        Size.Width = 356.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Text = 'Tela de Acesso'
+        TabOrder = 0
+      end
     end
   end
 end

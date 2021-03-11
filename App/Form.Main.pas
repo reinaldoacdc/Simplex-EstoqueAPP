@@ -28,21 +28,22 @@ type
     btnEntrar: TRectangle;
     btnSair: TRectangle;
     lblUsuario: TLabel;
-    ScaledLayout2: TScaledLayout;
-    GridLayout1: TGridLayout;
-    Layout3: TLayout;
-    btnLogin: TRectangle;
-    lblNovoLogin: TLabel;
-    Layout4: TLayout;
-    btnEstoque: TRectangle;
-    lblEstoque: TLabel;
-    Layout5: TLayout;
-    btnConfiguracoes: TRectangle;
-    lblConfiguracao: TLabel;
-    procedure ESTOQUEClick(Sender: TObject);
-    procedure CONFIGURACAOClick(Sender: TObject);
+    Rectangle2: TRectangle;
+    Label1: TLabel;
+    GridPanelLayout1: TGridPanelLayout;
+    Layout7: TLayout;
+    Image5: TImage;
+    Label5: TLabel;
+    Layout2: TLayout;
+    Image2: TImage;
+    Label2: TLabel;
+    btnExit: TRectangle;
+    lbSair: TLabel;
     procedure btnEntrarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
   private
 
   public
@@ -56,6 +57,7 @@ var
 implementation
 
 {$R *.fmx}
+{$R *.LgXhdpiPh.fmx ANDROID}
 
 uses Form.Login, Form.Estoque, Form.Configuracao, Controller.API;
 
@@ -64,6 +66,11 @@ begin
   MultiView1.HideMaster;
   frmLogin := TfrmLogin.Create(Self);
   frmLogin.Show;
+end;
+
+procedure TfrmMain.btnExitClick(Sender: TObject);
+begin
+  Self.Close;
 end;
 
 procedure TfrmMain.btnSairClick(Sender: TObject);
@@ -76,27 +83,18 @@ begin
   frmEstoque.Show;
 end;
 
-procedure TfrmMain.CONFIGURACAOClick(Sender: TObject);
+procedure TfrmMain.Image2Click(Sender: TObject);
+begin
+  MultiView1.HideMaster;
+  frmEstoque := TfrmEstoque.Create(Self);
+  frmEstoque.Show;
+end;
+
+procedure TfrmMain.Image5Click(Sender: TObject);
 begin
   MultiView1.HideMaster;
   frmConfiguracao := TfrmConfiguracao.Create(Self);
   frmConfiguracao.Show;
-end;
-
-procedure TfrmMain.ESTOQUEClick(Sender: TObject);
-begin
-  MultiView1.HideMaster;
-
-  if frmMain.LoginSucessfull = False then
-  begin
-  frmLogin := TfrmLogin.Create(Self);
-  frmLogin.Show;
-  end
-  else
-  begin
-    frmEstoque := TfrmEstoque.Create(Self);
-  frmEstoque.Show;
-  end;
 end;
 
 end.
