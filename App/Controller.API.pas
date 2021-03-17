@@ -15,7 +15,9 @@ protected
 public
   function Login(username, password :String) :Boolean;
 
-  function getProduto(id :String; codempresa :Integer) :TPRODUTOS;
+  function getProdutoCodFabr(id :String; codempresa :Integer) :TPRODUTOS;
+  function getProdutoCodInterno(id :String; codempresa :Integer) :TPRODUTOS;
+  function getProdutoCodBarras(id :String; codempresa :Integer) :TPRODUTOS;
   function getEmprsas :TStringList;
   procedure postEstoque(codpro :Integer; qtdade :Double; codempresa :Integer);
 
@@ -55,12 +57,38 @@ begin
   end;
 end;
 
-function TApi.getProduto(id :String; codempresa :Integer) :TPRODUTOS;
+function TApi.getProdutoCodBarras(id: String; codempresa: Integer): TPRODUTOS;
 var
   Url, JSonData   : String;
   item: TJSONObject;
 begin
-  Url := Format('http://%s/produto?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
+  Url := Format('http://%s/produto/codbarras/?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
+  JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
+
+  //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;
+  FJSonObject := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
+  Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
+end;
+
+function TApi.getProdutoCodFabr(id :String; codempresa :Integer) :TPRODUTOS;
+var
+  Url, JSonData   : String;
+  item: TJSONObject;
+begin
+  Url := Format('http://%s/produto/codfabr/?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
+  JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
+
+  //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;
+  FJSonObject := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
+  Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
+end;
+
+function TApi.getProdutoCodInterno(id: String; codempresa: Integer): TPRODUTOS;
+var
+  Url, JSonData   : String;
+  item: TJSONObject;
+begin
+  Url := Format('http://%s/produto/codinterno/?codpro=%s&codempresa=%d', [ConfigINI.AcessoBanco.URL_API, id, codempresa]);
   JSonData := FNetHTTPRequest.Get(Url).ContentAsString;
 
   //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;

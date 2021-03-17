@@ -29,6 +29,10 @@ type
     FUNIDADE: String;
     [JsonName('INFORMACAO_COMPLEMENTAR')]
     FINFORMACAO_COMPLEMENTAR: String;
+    [JsonName('NOME_FABRICANTE')]
+    FNOME_FABRICANTE: String;
+    [JsonName('CODIGO_BARRAS')]
+    FCODIGO_BARRAS: String;
   public
     function ToJSONObject: TJsonObject;
     function ToJsonString: string;
@@ -44,6 +48,8 @@ type
   property ESTOQUE :Double read FESTOQUE write FESTOQUE;
   property LOCAL_ESTOQUE :String read FLOCAL_ESTOQUE write FLOCAL_ESTOQUE;
   property CODEMPRESA :Integer read FCODEMPRESA write FCODEMPRESA;
+  property NOME_FABRICANTE :String read FNOME_FABRICANTE write FNOME_FABRICANTE;
+  property CODIGO_BARRAS :String read FCODIGO_BARRAS write FCODIGO_BARRAS;
 end;
 
 implementation

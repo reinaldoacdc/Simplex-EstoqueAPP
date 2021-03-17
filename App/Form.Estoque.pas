@@ -69,6 +69,10 @@ type
     procedure Load(prod :TPRODUTOS);
 
     procedure Ajustar_Scroll;
+
+    procedure PesquisaCodFabr;
+    procedure PesquisaCodInterno;
+    procedure PesquisaCodBarras;
   public
     { Public declarations }
   end;
@@ -110,12 +114,12 @@ begin
 
       try
         objAPI.postEstoque( Fprod, StrToFloat(edtQuantidade.Text), frmMain.CodEmpresa  );
-        Clear;
+        //Clear;
       except on E :Exception do
-        begin
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
-        end;
+//        begin
+//         TToast.New(Self).Error('Erro: ' + E.Message);
+//         TLoading.Hide;
+//        end;
       end;
 
       TThread.Synchronize(nil, procedure
@@ -128,50 +132,13 @@ begin
 end;
 
 procedure TfrmEstoque.btnPesquisarClick(Sender: TObject);
-var
-  idPesquisa, error :String;
-  prod :TPRODUTOS;
 begin
-  idPesquisa := edtCodFabr.Text;
-  error := '';
-  TLoading.Show(Self, 'Consultando...');
-
-
-//      Fprod := 0;
-//      try
-//        prod := objAPI.getProduto(idPesquisa, frmMain.CodEmpresa);
-//        Load(prod);
-//      except on E :Exception do
-//        begin
-//         TToast.New(Self).Error('Erro: ' + E.Message);
-//         TLoading.Hide;
-//        end;
-//      end;
-
-  TThread.CreateAnonymousThread(procedure
-  begin
-      Fprod := 0;
-      try
-        prod := objAPI.getProduto(idPesquisa, frmMain.CodEmpresa);
-        Load(prod);
-      except on E :Exception do
-        begin
-         error := E.Message;
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
-        end;
-      end;
-
-      TThread.Synchronize(nil, procedure
-      begin
-        TLoading.Hide;
-        if error <> '' then
-           TToast.New(Self).Error('Erro: ' + error);
-        if Fprod = 0 then
-          TToast.New(Self).Error('Produto não encontrado');
-      end);
-
-  end).Start;
+  if edtCodFabr.Text <> '' then
+    PesquisaCodFabr
+  else if edtCodInterno.Text <> '' then
+    PesquisaCodInterno
+  else if edtCodBarras.Text <>'' then
+    PesquisaCodBarras;
 end;
 
 procedure TfrmEstoque.Clear;
@@ -233,8 +200,113 @@ begin
   REF_INTERNA.Text    := 'REF_INTERNA: ' + prod.REFERENCIAINTERNA;
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
   ESTOQUE.Text        := 'ESTOQUE: ' + FloatToStr(prod.ESTOQUE);
-  FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.INFORMACAO_COMPLEMENTAR;
+  FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.NOME_FABRICANTE;
   ListBox1.Visible := True;
+end;
+
+procedure TfrmEstoque.PesquisaCodBarras;
+var
+  idPesquisa, error :String;
+  prod :TPRODUTOS;
+begin
+  idPesquisa := edtCodBarras.Text;
+  error := '';
+  TLoading.Show(Self, 'Consultando...');
+
+  TThread.CreateAnonymousThread(procedure
+  begin
+      Fprod := 0;
+      try
+        prod := objAPI.getProdutoCodBarras(idPesquisa, frmMain.CodEmpresa);
+        Load(prod);
+      except on E :Exception do
+        begin
+         error := E.Message;
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
+      end;
+
+      TThread.Synchronize(nil, procedure
+      begin
+        TLoading.Hide;
+        if error <> '' then
+           TToast.New(Self).Error('Erro: ' + error);
+        if Fprod = 0 then
+          TToast.New(Self).Error('Produto não encontrado');
+      end);
+
+  end).Start;
+end;
+
+procedure TfrmEstoque.PesquisaCodFabr;
+var
+  idPesquisa, error :String;
+  prod :TPRODUTOS;
+begin
+  idPesquisa := edtCodFabr.Text;
+  error := '';
+  TLoading.Show(Self, 'Consultando...');
+
+  TThread.CreateAnonymousThread(procedure
+  begin
+      Fprod := 0;
+      try
+        prod := objAPI.getProdutoCodFabr(idPesquisa, frmMain.CodEmpresa);
+        Load(prod);
+      except on E :Exception do
+        begin
+         error := E.Message;
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
+      end;
+
+      TThread.Synchronize(nil, procedure
+      begin
+        TLoading.Hide;
+        if error <> '' then
+           TToast.New(Self).Error('Erro: ' + error);
+        if Fprod = 0 then
+          TToast.New(Self).Error('Produto não encontrado');
+      end);
+
+  end).Start;
+end;
+
+procedure TfrmEstoque.PesquisaCodInterno;
+var
+  idPesquisa, error :String;
+  prod :TPRODUTOS;
+begin
+  idPesquisa := edtCodInterno.Text;
+  error := '';
+  TLoading.Show(Self, 'Consultando...');
+
+  TThread.CreateAnonymousThread(procedure
+  begin
+      Fprod := 0;
+      try
+        prod := objAPI.getProdutoCodInterno(idPesquisa, frmMain.CodEmpresa);
+        Load(prod);
+      except on E :Exception do
+        begin
+         error := E.Message;
+         TToast.New(Self).Error('Erro: ' + E.Message);
+         TLoading.Hide;
+        end;
+      end;
+
+      TThread.Synchronize(nil, procedure
+      begin
+        TLoading.Hide;
+        if error <> '' then
+           TToast.New(Self).Error('Erro: ' + error);
+        if Fprod = 0 then
+          TToast.New(Self).Error('Produto não encontrado');
+      end);
+
+  end).Start;
 end;
 
 procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);
