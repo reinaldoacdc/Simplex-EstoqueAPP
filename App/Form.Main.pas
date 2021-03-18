@@ -11,23 +11,10 @@ uses
 
 type
   TfrmMain = class(TForm)
-    MultiView1: TMultiView;
     ToolBar1: TToolBar;
-    SpeedButton1: TSpeedButton;
-    Rectangle1: TRectangle;
-    lblLogin: TLabel;
-    Layout1: TLayout;
-    lblSair: TLabel;
     ActionList1: TActionList;
-    ListBox1: TListBox;
-    ESTOQUE: TListBoxItem;
     ImageList1: TImageList;
-    CONFIGURACAO: TListBoxItem;
-    Image1: TImage;
     FloatAnimation1: TFloatAnimation;
-    btnEntrar: TRectangle;
-    btnSair: TRectangle;
-    lblUsuario: TLabel;
     Rectangle2: TRectangle;
     Label1: TLabel;
     GridPanelLayout1: TGridPanelLayout;
@@ -63,7 +50,6 @@ uses Form.Login, Form.Estoque, Form.Configuracao, Controller.API;
 
 procedure TfrmMain.btnEntrarClick(Sender: TObject);
 begin
-  MultiView1.HideMaster;
   frmLogin := TfrmLogin.Create(Self);
   frmLogin.Show;
 end;
@@ -75,9 +61,7 @@ end;
 
 procedure TfrmMain.btnSairClick(Sender: TObject);
 begin
-  MultiView1.HideMaster;
   Self.LoginSucessfull := False;
-  lblUsuario.Text := '';
 
   frmEstoque := TfrmEstoque.Create(Self);
   frmEstoque.Show;
@@ -85,14 +69,12 @@ end;
 
 procedure TfrmMain.Image2Click(Sender: TObject);
 begin
-  MultiView1.HideMaster;
   frmEstoque := TfrmEstoque.Create(Self);
   frmEstoque.Show;
 end;
 
 procedure TfrmMain.Image5Click(Sender: TObject);
 begin
-  MultiView1.HideMaster;
   frmConfiguracao := TfrmConfiguracao.Create(Self);
   frmConfiguracao.Show;
 end;

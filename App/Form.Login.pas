@@ -114,7 +114,6 @@ begin
           Self.Hide;
 
           frmMain.Show;
-          frmMain.lblUsuario.Text := NameEdit.Text;
           TLoading.Hide;
         end
         else

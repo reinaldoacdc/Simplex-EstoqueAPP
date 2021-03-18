@@ -4,10 +4,11 @@ interface
 
 uses
   Model.Entity.PRODUTOS,
+  FMX.platform, androidapi.JNI.GraphicsContentViewText,
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Edit, FMX.ListBox,
-  FMX.Ani, u99Permissions;
+  FMX.Ani, u99Permissions, uConfigINI;
 
 type
   TfrmEstoque = class(TForm)
@@ -49,8 +50,8 @@ type
     REF_FABRICANTE: TListBoxItem;
     REF_INTERNA: TListBoxItem;
     DESCRICAO: TListBoxItem;
-    ESTOQUE: TListBoxItem;
     FORNECEDOR: TListBoxItem;
+    Timer1: TTimer;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -61,10 +62,16 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure edtCodBarrasEnter(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     Fprod :Integer;
     foco : TControl;
     permissao : T99Permissions;
+
+    ClipService: IFMXClipboardService;
+    Elapsed: integer;
+
     procedure Clear;
     procedure Load(prod :TPRODUTOS);
 
@@ -85,7 +92,7 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
-uses FMX.Toast, Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
+uses Androidapi.Helpers, FMX.Toast, Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
 
 procedure TfrmEstoque.Ajustar_Scroll;
 var
@@ -101,6 +108,8 @@ begin
 end;
 
 procedure TfrmEstoque.btnAtualizarClick(Sender: TObject);
+var
+  error :String;
 begin
   if Fprod = 0 then
   begin
@@ -108,24 +117,28 @@ begin
     Exit;
   end;
 
+  error := '';
   TLoading.Show(Self, 'Atualizando...');
   TThread.CreateAnonymousThread(procedure
   begin
 
       try
         objAPI.postEstoque( Fprod, StrToFloat(edtQuantidade.Text), frmMain.CodEmpresa  );
-        //Clear;
       except on E :Exception do
-//        begin
-//         TToast.New(Self).Error('Erro: ' + E.Message);
-//         TLoading.Hide;
-//        end;
+        error := E.Message;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
-        //Clear;
+
+        if error = '' then
+          TToast.New(Self).Success('"Quantidade atualizada!')
+        else
+          TToast.New(Self).Error('Erro ao atualizar: ' + error);
+
+
+        Clear;
       end);
 
   end).Start;
@@ -152,7 +165,23 @@ begin
 end;
 
 procedure TfrmEstoque.edtCodBarrasEnter(Sender: TObject);
+var
+ Intent : JIntent;
 begin
+  if ConfigINI.UsaAppLeitorCodBarras then
+  begin
+    if assigned(ClipService) then
+    begin
+      clipservice.SetClipboard('nil');
+      intent := tjintent.Create;
+      intent.setAction( stringtojstring('com.google.zxing.client.android.SCAN'));
+      SharedActivity.startActivityForResult(intent,0);
+      Elapsed := 0;
+      Timer1.Enabled := True;
+    end;
+  end
+  else
+  begin
     if NOT permissao.VerifyCameraAccess then
         permissao.Camera(nil, nil)
     else
@@ -162,6 +191,7 @@ begin
             edtCodBarras.Text := FrmCamera.codigo;
         end);
     end;
+  end;
 end;
 
 procedure TfrmEstoque.edtQuantidadeEnter(Sender: TObject);
@@ -170,9 +200,18 @@ begin
   Ajustar_Scroll();
 end;
 
+procedure TfrmEstoque.FormActivate(Sender: TObject);
+begin
+ ClipService.SetClipboard('nil');
+end;
+
 procedure TfrmEstoque.FormCreate(Sender: TObject);
 begin
   permissao := T99Permissions.Create;
+  if not TPlatformServices.Current.SupportsPlatformService(IFMXClipboardService, IInterface(ClipService)) then
+    ClipService := nil;
+
+  Elapsed := 0;
 end;
 
 procedure TfrmEstoque.FormDestroy(Sender: TObject);
@@ -199,7 +238,6 @@ begin
   REF_FABRICANTE.Text := 'REF_FABRICANTE: ' + prod.CODPROFABR;
   REF_INTERNA.Text    := 'REF_INTERNA: ' + prod.REFERENCIAINTERNA;
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
-  ESTOQUE.Text        := 'ESTOQUE: ' + FloatToStr(prod.ESTOQUE);
   FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.NOME_FABRICANTE;
   ListBox1.Visible := True;
 end;
@@ -222,8 +260,6 @@ begin
       except on E :Exception do
         begin
          error := E.Message;
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
         end;
       end;
 
@@ -312,6 +348,26 @@ end;
 procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);
 begin
   Self.Close;
+end;
+
+procedure TfrmEstoque.Timer1Timer(Sender: TObject);
+begin
+  if (ClipService.GetClipboard.ToString <> 'nil') then
+  begin
+    timer1.Enabled := false;
+    Elapsed := 0;
+    edtCodBarras.Text := ClipService.GetClipboard.ToString;
+  end
+  else
+    begin
+      if Elapsed > 9 then
+        begin
+          timer1.Enabled := false;
+          Elapsed := 0;
+        end
+      else
+          Elapsed := Elapsed +1;
+    end;
 end;
 
 end.

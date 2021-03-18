@@ -12,7 +12,7 @@ type
   TfrmConfiguracao = class(TForm)
     Layout1: TLayout;
     Layout2: TLayout;
-    SpeedButton1: TSpeedButton;
+    btnGravar: TSpeedButton;
     Label1: TLabel;
     URL_API: TEdit;
     ImageList1: TImageList;
@@ -23,7 +23,7 @@ type
     Switch1: TSwitch;
     Label3: TLabel;
     procedure FormShow(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
@@ -43,13 +43,13 @@ uses uConfigINI;
 procedure TfrmConfiguracao.FormShow(Sender: TObject);
 begin
   URL_API.Text := ConfigINI.AcessoBanco.URL_API;
-  Switch1.Pressed := ConfigINI.UsaAppLeitorCodBarras;
+  Switch1.IsChecked := ConfigINI.UsaAppLeitorCodBarras;
 end;
 
-procedure TfrmConfiguracao.SpeedButton1Click(Sender: TObject);
+procedure TfrmConfiguracao.btnGravarClick(Sender: TObject);
 begin
   ConfigINI.AcessoBanco.URL_API := URL_API.Text;
-  ConfigINI.UsaAppLeitorCodBarras := Switch1.Pressed;
+  ConfigINI.UsaAppLeitorCodBarras := Switch1.IsChecked;
   ConfigINI.UpdateFile;
 
   Self.Close;

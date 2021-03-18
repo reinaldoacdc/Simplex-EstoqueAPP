@@ -59,7 +59,7 @@ object frmConfiguracao: TfrmConfiguracao
         Size.Height = 81.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        object SpeedButton1: TSpeedButton
+        object btnGravar: TSpeedButton
           Align = Center
           Images = ImageList1
           ImageIndex = 0
@@ -68,7 +68,7 @@ object frmConfiguracao: TfrmConfiguracao
           Size.Width = 20.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
-          OnClick = SpeedButton1Click
+          OnClick = btnGravarClick
         end
       end
       object Label1: TLabel
@@ -97,7 +97,6 @@ object frmConfiguracao: TfrmConfiguracao
         Position.X = 16.000000000000000000
         Position.Y = 120.000000000000000000
         TabOrder = 4
-        Visible = False
       end
       object Label3: TLabel
         StyledSettings = [Family, Style, FontColor]
@@ -107,7 +106,6 @@ object frmConfiguracao: TfrmConfiguracao
         Size.PlatformDefault = False
         TextSettings.Font.Size = 20.000000000000000000
         Text = 'Usa App Leitor CodBarras'
-        Visible = False
         TabOrder = 2
       end
     end
