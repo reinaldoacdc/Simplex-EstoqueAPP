@@ -3,12 +3,13 @@ unit Form.Estoque;
 interface
 
 uses
-  Model.Entity.PRODUTOS,
+  Model.Entity.PRODUTOS,  System.Generics.Collections,
   FMX.platform, androidapi.JNI.GraphicsContentViewText,
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Edit, FMX.ListBox,
-  FMX.Ani, u99Permissions, uConfigINI;
+  FMX.Ani, u99Permissions, uConfigINI, Model.List.PRODUTOS, SubjectStand,
+  FrameStand, Data.DB, Datasnap.DBClient;
 
 type
   TfrmEstoque = class(TForm)
@@ -52,6 +53,14 @@ type
     DESCRICAO: TListBoxItem;
     FORNECEDOR: TListBoxItem;
     Timer1: TTimer;
+    FrameStand1: TFrameStand;
+    StyleBook1: TStyleBook;
+    cdsProdutos: TClientDataSet;
+    cdsProdutosCODPROFABR: TStringField;
+    cdsProdutosCODIGO_PRODUTO: TIntegerField;
+    cdsProdutosDESCRICAO: TStringField;
+    cdsProdutosREF_INTERNA: TStringField;
+    cdsProdutosFORNECEDOR: TStringField;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -64,8 +73,9 @@ type
     procedure edtCodBarrasEnter(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FrameStand1BeforeShow(const ASender: TSubjectStand;
+      const ASubjectInfo: TSubjectInfo);
   private
-    Fprod :Integer;
     foco : TControl;
     permissao : T99Permissions;
 
@@ -76,12 +86,16 @@ type
     procedure Load(prod :TPRODUTOS);
 
     procedure Ajustar_Scroll;
+    procedure AddProdToDataset(produto :TPRODUTOS);
 
     procedure PesquisaCodFabr;
     procedure PesquisaCodInterno;
     procedure PesquisaCodBarras;
+
+    procedure SelecaoItem(produtos :TObjectList<TPRODUTOS>);
   public
-    { Public declarations }
+    Fprod :Integer;
+    procedure LoadFromFrame;
   end;
 
 var
@@ -92,7 +106,20 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
-uses Androidapi.Helpers, FMX.Toast, Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
+uses Androidapi.Helpers, FMX.Toast,
+     Frames.Dataset,
+     Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
+
+procedure TfrmEstoque.AddProdToDataset(produto: TPRODUTOS);
+begin
+  cdsProdutos.Insert;
+  cdsProdutosCODPROFABR.AsString := produto.CODPROFABR;
+  cdsProdutosCODIGO_PRODUTO.AsInteger := produto.CODPRO;
+  cdsProdutosDESCRICAO.AsString := produto.DESCRICAO;
+  cdsProdutosREF_INTERNA.AsString := produto.REFERENCIAINTERNA;
+  cdsProdutosFORNECEDOR.AsString := produto.NOME_FABRICANTE;
+  cdsProdutos.Post;
+end;
 
 procedure TfrmEstoque.Ajustar_Scroll;
 var
@@ -230,6 +257,26 @@ begin
   VScroll.Margins.Bottom := 0;
 end;
 
+procedure TfrmEstoque.FrameStand1BeforeShow(const ASender: TSubjectStand;
+  const ASubjectInfo: TSubjectInfo);
+var
+  LContentBackground: TRectangle;
+  LTenPercent: Single;
+begin
+  LTenPercent := 0;
+  if ASubjectInfo.Parent is TCustomForm then
+    LTenPercent := TCustomForm(ASubjectInfo.Parent).Width / 10
+  else if ASubjectInfo.Parent is TControl then
+    LTenPercent := TControl(ASubjectInfo.Parent).Width / 10;
+
+  LContentBackground := ASubjectInfo.Stand.FindStyleResource('content_background') as TRectangle;
+
+  if Assigned(LContentBackground) then
+    LContentBackground.Margins.Rect := TRectF.Create(LTenPercent, LTenPercent
+    , LTenPercent, LTenPercent);
+
+end;
+
 procedure TfrmEstoque.Load(prod :TPRODUTOS);
 begin
   Fprod := prod.CODPRO;
@@ -239,6 +286,18 @@ begin
   REF_INTERNA.Text    := 'REF_INTERNA: ' + prod.REFERENCIAINTERNA;
   DESCRICAO.Text      := 'DESCRIÇÃO: ' + prod.DESCRICAO;
   FORNECEDOR.Text     := 'FORNECEDOR: ' + prod.NOME_FABRICANTE;
+  ListBox1.Visible := True;
+end;
+
+procedure TfrmEstoque.LoadFromFrame;
+begin
+  Fprod := cdsProdutosCODIGO_PRODUTO.AsInteger;
+
+  CODIGO_INTERNO.Text := 'CODIGO_INTERNO: ' + cdsProdutosCODIGO_PRODUTO.AsString;
+  REF_FABRICANTE.Text := 'REF_FABRICANTE: ' + cdsProdutosCODPROFABR.AsString;
+  REF_INTERNA.Text    := 'REF_INTERNA: '    + cdsProdutosREF_INTERNA.AsString;
+  DESCRICAO.Text      := 'DESCRIÇÃO: ' + cdsProdutosDESCRICAO.AsString;
+  FORNECEDOR.Text     := 'FORNECEDOR: ' + cdsProdutosFORNECEDOR.AsString;
   ListBox1.Visible := True;
 end;
 
@@ -278,7 +337,7 @@ end;
 procedure TfrmEstoque.PesquisaCodFabr;
 var
   idPesquisa, error :String;
-  prod :TPRODUTOS;
+  produtos :TListaProdutos;
 begin
   idPesquisa := edtCodFabr.Text;
   error := '';
@@ -288,23 +347,28 @@ begin
   begin
       Fprod := 0;
       try
-        prod := objAPI.getProdutoCodFabr(idPesquisa, frmMain.CodEmpresa);
-        Load(prod);
+        produtos := objAPI.getProdutoCodFabr(idPesquisa, frmMain.CodEmpresa);
       except on E :Exception do
         begin
          error := E.Message;
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
         end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
-        if error <> '' then
-           TToast.New(Self).Error('Erro: ' + error);
-        if Fprod = 0 then
-          TToast.New(Self).Error('Produto não encontrado');
+
+        if produtos.FLista.Count > 1 then
+          SelecaoItem(produtos.Flista)
+        else if produtos.FLista.Count = 1 then
+          Load(produtos.FLista.Items[0])
+        else
+        begin
+          if error <> '' then
+             TToast.New(Self).Error('Erro: ' + error);
+          if Fprod = 0 then
+            TToast.New(Self).Error('Produto não encontrado');
+        end;
       end);
 
   end).Start;
@@ -313,7 +377,7 @@ end;
 procedure TfrmEstoque.PesquisaCodInterno;
 var
   idPesquisa, error :String;
-  prod :TPRODUTOS;
+  produtos :TListaProdutos;
 begin
   idPesquisa := edtCodInterno.Text;
   error := '';
@@ -323,26 +387,49 @@ begin
   begin
       Fprod := 0;
       try
-        prod := objAPI.getProdutoCodInterno(idPesquisa, frmMain.CodEmpresa);
-        Load(prod);
+        produtos := objAPI.getProdutoCodInterno(idPesquisa, frmMain.CodEmpresa);
       except on E :Exception do
         begin
          error := E.Message;
-         TToast.New(Self).Error('Erro: ' + E.Message);
-         TLoading.Hide;
         end;
       end;
 
       TThread.Synchronize(nil, procedure
       begin
         TLoading.Hide;
-        if error <> '' then
-           TToast.New(Self).Error('Erro: ' + error);
-        if Fprod = 0 then
-          TToast.New(Self).Error('Produto não encontrado');
+
+        if produtos.FLista.Count > 1 then
+          SelecaoItem(produtos.Flista)
+        else if produtos.FLista.Count = 1 then
+          Load(produtos.FLista.Items[0])
+        else
+        begin
+          if error <> '' then
+             TToast.New(Self).Error('Erro: ' + error);
+          if Fprod = 0 then
+            TToast.New(Self).Error('Produto não encontrado');
+        end;
       end);
 
   end).Start;
+end;
+
+procedure TfrmEstoque.SelecaoItem(produtos :TObjectList<TPRODUTOS>);
+var
+  LFrameInfo: TFrameInfo<TDatasetFrame>;
+  produto :TPRODUTOS;
+begin
+  cdsProdutos.EmptyDataSet;
+  for produto in produtos do
+    AddProdToDataset(produto);
+
+  LFrameInfo := FrameStand1.New<TDatasetFrame>();
+
+  LFrameInfo.Frame.DataSet := cdsProdutos;
+  LFrameInfo.Frame.ItemTextField := 'DESCRICAO';
+  LFrameInfo.Frame.DetailField := 'CODIGO_PRODUTO';
+
+  LFrameInfo.Show;
 end;
 
 procedure TfrmEstoque.SpeedButton1Click(Sender: TObject);

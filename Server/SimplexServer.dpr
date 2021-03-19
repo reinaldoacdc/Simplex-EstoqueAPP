@@ -20,7 +20,8 @@ uses
   Model.Entity.ESTOQUE in 'Model\Entity\Model.Entity.ESTOQUE.pas',
   Controller.API in '..\App\Controller.API.pas',
   Controller.Empresa in 'Controller\Controller.Empresa.pas',
-  Model.Entity.EMPRESA in 'Model\Entity\Model.Entity.EMPRESA.pas';
+  Model.Entity.EMPRESA in 'Model\Entity\Model.Entity.EMPRESA.pas',
+  Model.List.PRODUTOS in 'Model\List\Model.List.PRODUTOS.pas';
 
 var
   App : THorse;

@@ -1,0 +1,17 @@
+﻿[ListView1]
+Coordinates=10,10,107,190
+
+[BindSourceDB1]
+Coordinates=290,90,125,146
+Visible=True
+
+[BindingsList1]
+Coordinates=126,122,91,36
+
+[frmEstoque.cdsProdutos]
+Visible=False
+
+[DataSource1]
+Coordinates=106,219,89,36
+Visible=False
+

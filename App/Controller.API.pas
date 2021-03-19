@@ -3,7 +3,8 @@ unit Controller.API;
 interface
 
 uses  Model.Entity.PRODUTOS,
-System.Classes, System.JSON, System.Net.HttpClient, System.Net.HttpClientComponent;
+System.Classes, System.JSON, System.Net.HttpClient, System.Net.HttpClientComponent,
+  Model.List.PRODUTOS;
 
 type TApi = class
 private
@@ -15,8 +16,8 @@ protected
 public
   function Login(username, password :String) :Boolean;
 
-  function getProdutoCodFabr(id :String; codempresa :Integer) :TPRODUTOS;
-  function getProdutoCodInterno(id :String; codempresa :Integer) :TPRODUTOS;
+  function getProdutoCodFabr(id :String; codempresa :Integer) :TListaProdutos;
+  function getProdutoCodInterno(id :String; codempresa :Integer) :TListaProdutos;
   function getProdutoCodBarras(id :String; codempresa :Integer) :TPRODUTOS;
   function getEmprsas :TStringList;
   procedure postEstoque(codpro :Integer; qtdade :Double; codempresa :Integer);
@@ -70,7 +71,7 @@ begin
   Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
 end;
 
-function TApi.getProdutoCodFabr(id :String; codempresa :Integer) :TPRODUTOS;
+function TApi.getProdutoCodFabr(id :String; codempresa :Integer) :TListaProdutos;
 var
   Url, JSonData   : String;
   item: TJSONObject;
@@ -80,10 +81,10 @@ begin
 
   //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;
   FJSonObject := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
-  Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
+  Result := Tjson.JsonToObject<TListaProdutos>(FJSonObject);
 end;
 
-function TApi.getProdutoCodInterno(id: String; codempresa: Integer): TPRODUTOS;
+function TApi.getProdutoCodInterno(id: String; codempresa: Integer): TListaProdutos;
 var
   Url, JSonData   : String;
   item: TJSONObject;
@@ -93,7 +94,7 @@ begin
 
   //FJSonObject := TJSONObject.ParseJSONValue(JsonData) as TJSONObject;
   FJSonObject := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(JsonData),0) as TJSONObject;
-  Result := Tjson.JsonToObject<TPRODUTOS>(FJSonObject);
+  Result := Tjson.JsonToObject<TListaProdutos>(FJSonObject);
 end;
 
 function TApi.Login(username, password: String): Boolean;

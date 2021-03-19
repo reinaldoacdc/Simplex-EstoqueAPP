@@ -13,7 +13,9 @@ uses
   Model.Entity.PRODUTOS in '..\Server\Model\Entity\Model.Entity.PRODUTOS.pas',
   Model.Entity.ESTOQUE in '..\Server\Model\Entity\Model.Entity.ESTOQUE.pas',
   u99Permissions in 'u99Permissions.pas',
-  UnitCamera in 'UnitCamera.pas' {FrmCamera};
+  UnitCamera in 'UnitCamera.pas' {FrmCamera},
+  Model.List.PRODUTOS in '..\Server\Model\List\Model.List.PRODUTOS.pas',
+  Frames.Dataset in 'Frames.Dataset.pas' {DatasetFrame: TFrame};
 
 {$R *.res}
 

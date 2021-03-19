@@ -3,7 +3,7 @@ unit Model.Entity.PRODUTOS;
 interface
 
 
-uses System.JSON,  REST.Json, REST.Json.Types, SimpleAttributes;
+uses System.JSON, REST.Json.Types, SimpleAttributes;
 
 type
   [Tabela('VIEW_PRODUTOS')]
@@ -55,6 +55,7 @@ end;
 implementation
 
 { TPRODUTOS }
+uses REST.Json;
 
 function TPRODUTOS.ToJSONObject: TJsonObject;
 begin

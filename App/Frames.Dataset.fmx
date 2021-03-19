@@ -1,0 +1,49 @@
+object DatasetFrame: TDatasetFrame
+  Align = Client
+  Size.Width = 320.000000000000000000
+  Size.Height = 240.000000000000000000
+  Size.PlatformDefault = False
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TListItemRightDetailAppearance'
+    ItemEditAppearanceClassName = 'TListItemRightDetailDeleteAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 240.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+    OnClick = ListView1Click
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSource = DataSource1
+    ScopeMappings = <>
+    Left = 32
+    Top = 72
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 36
+    Top = 21
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'CODIGO_PRODUTO'
+      Control = ListView1
+      FillExpressions = <
+        item
+          SourceMemberName = 'DESCRICAO'
+          ControlMemberName = 'Detail'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = frmEstoque.cdsProdutos
+    Left = 176
+    Top = 40
+  end
+end
