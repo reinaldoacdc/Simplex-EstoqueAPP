@@ -4,7 +4,12 @@ interface
 
 uses
   Model.Entity.PRODUTOS,  System.Generics.Collections,
-  FMX.platform, androidapi.JNI.GraphicsContentViewText,
+  FMX.platform,
+
+  {$IFDEF ANDROID}
+    androidapi.JNI.GraphicsContentViewText,
+  {$ENDIF}
+
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Edit, FMX.ListBox,
@@ -70,7 +75,9 @@ type
     procedure edtQuantidadeEnter(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+
     procedure edtCodBarrasEnter(Sender: TObject);
+
     procedure Timer1Timer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FrameStand1BeforeShow(const ASender: TSubjectStand;
@@ -106,9 +113,14 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
-uses Androidapi.Helpers, FMX.Toast,
-     Frames.Dataset,
-     Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
+uses
+  {$IFDEF ANDROID}
+    Androidapi.Helpers,
+  {$ENDIF}
+
+  FMX.Toast,
+  Frames.Dataset,
+  Form.Login, Loading, Controller.API, Form.Main, UnitCamera;
 
 procedure TfrmEstoque.AddProdToDataset(produto: TPRODUTOS);
 begin
@@ -122,15 +134,12 @@ begin
 end;
 
 procedure TfrmEstoque.Ajustar_Scroll;
-var
-  x : integer;
 begin
   with Self do
   begin
     VScroll.Margins.Bottom := 250;
     VScroll.ViewportPosition := PointF(VScroll.ViewportPosition.X,
                                 TControl(foco).Position.Y - 90);
-
   end;
 end;
 
@@ -191,10 +200,14 @@ begin
   //ListBox1.Visible := False;
 end;
 
+
 procedure TfrmEstoque.edtCodBarrasEnter(Sender: TObject);
+{$IFDEF ANDROID}
 var
- Intent : JIntent;
+  Intent : JIntent;
+{$ENDIF}
 begin
+  {$IFDEF ANDROID}
   if ConfigINI.UsaAppLeitorCodBarras then
   begin
     if assigned(ClipService) then
@@ -219,7 +232,9 @@ begin
         end);
     end;
   end;
+  {$ENDIF}
 end;
+
 
 procedure TfrmEstoque.edtQuantidadeEnter(Sender: TObject);
 begin

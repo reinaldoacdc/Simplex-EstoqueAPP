@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.ListBox,
-  FMX.ComboEdit, Data.DB, Datasnap.DBClient;
+  FMX.ComboEdit, Data.DB, Datasnap.DBClient, Form.Configuracao;
 
 type
   TfrmLogin = class(TForm)
@@ -31,6 +31,7 @@ type
     ToolBar1: TToolBar;
     Label1: TLabel;
     Rectangle3: TRectangle;
+    Image1: TImage;
     procedure lblLogarClick(Sender: TObject);
     procedure NameEditKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
@@ -39,6 +40,7 @@ type
     procedure ComboBox1Enter(Sender: TObject);
     procedure PasswordEditKeyUp(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
+    procedure Image1Click(Sender: TObject);
   private
     function getCodEmpresa :Integer;
   public
@@ -82,6 +84,12 @@ var str :String;
 begin
   str := Copy(ComboBox1.Items[ComboBox1.ItemIndex], 1, pos('-', ComboBox1.Items[ComboBox1.ItemIndex])-1);
   Result := StrToInt(Trim(str));
+end;
+
+procedure TfrmLogin.Image1Click(Sender: TObject);
+begin
+  frmConfiguracao := TfrmConfiguracao.Create(Self);
+  frmConfiguracao.Show;
 end;
 
 procedure TfrmLogin.lblLogarClick(Sender: TObject);
