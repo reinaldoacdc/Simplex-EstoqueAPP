@@ -6,6 +6,6 @@
 	"mainsrc": "./",
 	"projects": [],
 	"dependencies": {
-		"github.com/mateusvicente100/fmx-toast": "^1.0.0"
+		"https://github.com/reinaldoacdc/fmx-toast": "^v1.1-alpha"
 	}
 }

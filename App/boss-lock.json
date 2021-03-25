@@ -1,11 +1,11 @@
 {
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
-	"updated": "2021-02-24T09:01:15.5097555-03:00",
+	"updated": "2021-03-25T12:51:24.2770976-03:00",
 	"installedModules": {
-		"github.com/mateusvicente100/fmx-toast": {
+		"https://github.com/reinaldoacdc/fmx-toast": {
 			"name": "fmx-toast",
-			"version": "1.0.0",
-			"hash": "238e963e8fc254c26552770cb26c2dae",
+			"version": "v1.1-alpha",
+			"hash": "3bcb351ec35643ee52294cea12dfdb4d",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
