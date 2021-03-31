@@ -9,6 +9,6 @@
 		"github.com/hashload/horse": "^2.0.13",
 		"github.com/hashload/horse-cors": "^1.0.3",
 		"github.com/hashload/jhonson": "^1.1.1",
-		"https://github.com/bittencourtthulio/simpleorm": "2.02.01"
+		"github.com/reinaldoacdc/simpleorm": "2.05.01"
 	}
 }

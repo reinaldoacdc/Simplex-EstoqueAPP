@@ -112,12 +112,6 @@ begin
   aObject := FDAO.Find(StrToInt(aID));
 end;
 
-function TDAOGeneric<T>.Find(const aID: String): TJsonObject;
-begin
-  FDAO.Find(aID);
-  Result := FDataSource.DataSet.AsJSONObject;
-end;
-
 function TDAOGeneric<T>.Insert(var aObject: T): TJsonObject;
 begin
   FDAO.Insert(aObject);
@@ -153,6 +147,12 @@ function TDAOGeneric<T>.Update(const aObject: T): iDAOGeneric<T>;
 begin
   FDAO.Update(aObject);
   Result := Self;
+end;
+
+function TDAOGeneric<T>.Find(const aID: String): TJsonObject;
+begin
+  FDAO.Find(aID, aID);
+  Result := FDataSource.DataSet.AsJSONObject;
 end;
 
 end.

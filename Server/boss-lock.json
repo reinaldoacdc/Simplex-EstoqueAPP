@@ -1,6 +1,6 @@
 {
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
-	"updated": "2021-03-30T14:14:57.1979327-03:00",
+	"updated": "2021-03-31T02:33:59.0452544-03:00",
 	"installedModules": {
 		"github.com/hashload/horse": {
 			"name": "horse",
@@ -26,10 +26,10 @@
 			"failed": false,
 			"changed": false
 		},
-		"https://github.com/bittencourtthulio/simpleorm": {
+		"github.com/reinaldoacdc/simpleorm": {
 			"name": "simpleorm",
-			"version": "2.02.01",
-			"hash": "312257d6314f98dbdb11275693294ea1",
+			"version": "2.05.01",
+			"hash": "539efa3231fc0164b0bfe4efd1bee98c",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

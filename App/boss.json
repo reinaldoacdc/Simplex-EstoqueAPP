@@ -6,6 +6,7 @@
 	"mainsrc": "./",
 	"projects": [],
 	"dependencies": {
+		"github.com/reinaldoacdc/simpleorm": "2.05.01",
 		"https://github.com/reinaldoacdc/fmx-toast": "^v1.1-alpha"
 	}
 }

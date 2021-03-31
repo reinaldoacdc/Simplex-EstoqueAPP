@@ -1,7 +1,15 @@
 {
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
-	"updated": "2021-03-25T12:51:24.2770976-03:00",
+	"updated": "2021-03-31T02:51:16.9661008-03:00",
 	"installedModules": {
+		"github.com/reinaldoacdc/simpleorm": {
+			"name": "simpleorm",
+			"version": "2.05.01",
+			"hash": "539efa3231fc0164b0bfe4efd1bee98c",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
 		"https://github.com/reinaldoacdc/fmx-toast": {
 			"name": "fmx-toast",
 			"version": "v1.1-alpha",
